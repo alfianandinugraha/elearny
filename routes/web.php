@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,14 @@ use App\Http\Controllers\Admin;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [HomeController::class, 'get'])->middleware('guest');
 
 Route::get('/admin/dashboard', [Admin\DashboardController::class, 'get'])
-    ->middleware('auth:admin')
-    ->name('admin-dashboard');
+    ->name('admin-dashboard')
+    ->middleware('auth:admin');
 
 Route::get('/admin/login', [Admin\AuthController::class, 'get'])->middleware('guest:admin');
 
-Route::get('/admin/logout', [Admin\AuthController::class, 'logout'])->middleware('auth:admin');
+Route::delete('/admin/logout', [Admin\AuthController::class, 'logout'])->middleware('auth:admin');
 
 Route::post('/admin/login', [Admin\AuthController::class, 'attempt'])->middleware('guest:admin');

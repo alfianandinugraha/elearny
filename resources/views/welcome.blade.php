@@ -192,10 +192,12 @@
                     </button>
                 </div>
                 <div class="modal-body">Klik button "Logout" untuk keluar dari aplikasi</div>
-                <div class="modal-footer">
+                <form class="modal-footer" action="/admin/logout" method="POST">
+                    @csrf
+                    @method('DELETE')
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger" href="login.html">Logout</a>
-                </div>
+                    <button class="btn btn-danger" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>
