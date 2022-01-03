@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function() {
         Route::prefix('student')->group(function() {
             Route::get('/', [Admin\StudentController::class, 'get']);
             Route::get('/add', [Admin\StudentController::class, 'add']);
+            Route::post('/add', [Admin\StudentController::class, 'store']);
             Route::delete('/delete/{studentId}', [Admin\StudentController::class, 'delete']);
         });
     });
