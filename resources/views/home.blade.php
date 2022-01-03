@@ -23,7 +23,10 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Elearny</h1>
-                                        <a class="btn btn-primary" href="/admin/login">Login Admin</a>
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn btn-primary mr-2" href="/admin/login">Login Admin</a>
+                                            <a class="btn btn-primary" href="/lecturer/login">Login Dosen</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
