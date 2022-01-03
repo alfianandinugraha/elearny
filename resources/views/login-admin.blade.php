@@ -24,19 +24,27 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Admin</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="/admin/login" method="POST">
+                                        @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input 
+                                                type="text" 
+                                                class="form-control form-control-user"
+                                                placeholder="Username"
+                                                value="admin"
+                                                name="username" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            <input 
+                                                type="password" 
+                                                class="form-control form-control-user"
+                                                placeholder="Password"
+                                                value="admin"
+                                                name="password" />
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                     </form>
                                 </div>
                             </div>
