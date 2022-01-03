@@ -38,6 +38,8 @@ Route::prefix('admin')->group(function() {
             Route::get('/add', [Admin\StudentController::class, 'add']);
             Route::post('/add', [Admin\StudentController::class, 'store']);
             Route::delete('/delete/{studentId}', [Admin\StudentController::class, 'delete']);
+            Route::get('/update/{student}', [Admin\StudentController::class, 'edit']);
+            Route::put('/update/{student}', [Admin\StudentController::class, 'update']);
         });
     });
 });

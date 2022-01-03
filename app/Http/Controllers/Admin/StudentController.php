@@ -21,6 +21,26 @@ class StudentController extends Controller
         return view('pages.admin.student.add');
     }
 
+    public function edit($studentId) {
+        $student = Student::all()->where('student_id', $studentId)->first();
+        return view('pages.admin.student.edit', [
+            'student' => $student
+        ]);
+    }
+
+    public function update($studentId, Request $request) {
+        $payload = $request->validate([
+            'student_number' => ['required'],
+            'fullname' => ['required'],
+            'email' => ['required'],
+            'gender' => ['required'],
+        ]);
+
+        Student::query()->where('student_id', $studentId)->update($payload);
+
+        return back();
+    }
+
     public function delete($studentId, Request $request) {
         Student::destroy($studentId);
         return back();
