@@ -100,19 +100,17 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">NPM</th>
+                                                <th scope="col">NIP</th>
                                                 <th scope="col">Nama</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($lecturers as $lecturer)
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
+                                                <th scope="row">{{$lecturer->lecturer_number}}</th>
+                                                <td>{{$lecturer->fullname}}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -137,14 +135,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($student as $person)
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
+                                                <th scope="row">{{$person->student_number}}</th>
+                                                <td>{{$person->fullname}}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

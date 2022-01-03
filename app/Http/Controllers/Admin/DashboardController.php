@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use App\Models\Lecturer;
+use App\Models\Student;
 
 class DashboardController extends Controller
 {
     public function get() {
-        return view('welcome');
+        $lecturers = Lecturer::all();
+        $student = Student::all();
+        return view('welcome', [
+            'lecturers' => $lecturers,
+            'student' => $student
+        ]);
     }
 }

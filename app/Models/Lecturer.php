@@ -9,7 +9,7 @@ class Lecturer extends Model
 {
     use HasFactory;
 
-    protected $table = 'lecturer';
+    protected $table = 'lecturers';
 
     protected $primaryKey = 'lecturer_id';
 
