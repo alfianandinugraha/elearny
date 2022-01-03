@@ -21,6 +21,13 @@ class LecturerController extends Controller
         return view('pages.admin.lecturer.add');
     }
 
+    public function edit($lecturerId) {
+        $lecturer = Lecturer::all()->where('lecturer_id', $lecturerId)->first();
+        return view('pages.admin.lecturer.edit', [
+            'lecturer' => $lecturer
+        ]);
+    }
+
     public function store(Request $request) {
         $payload = $request->validate([
             'lecturer_number' => ['required'],
