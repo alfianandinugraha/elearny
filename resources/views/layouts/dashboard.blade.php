@@ -1,3 +1,4 @@
+@inject('authService', 'App\Services\AuthService')
 <!DOCTYPE html>
 <html lang="en">
 
