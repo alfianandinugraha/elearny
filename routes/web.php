@@ -51,4 +51,5 @@ Route::prefix('admin')->group(function() {
 
 Route::prefix('lecturer')->group(function() {
     Route::get('/login', [Lecturer\AuthController::class, 'get']);
+    Route::post('/login', [Lecturer\AuthController::class, 'attempt']);
 });
