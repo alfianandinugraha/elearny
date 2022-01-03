@@ -58,5 +58,9 @@ Route::prefix('lecturer')->group(function() {
     Route::middleware('auth:lecturer')->group(function() {
         Route::get('/dashboard', [Lecturer\DashboardController::class, 'get']);
         Route::delete('/logout', [Lecturer\AuthController::class, 'logout']);
+
+        Route::prefix('courses')->group(function() {
+            Route::get('/', [Lecturer\CourseController::class, 'get']);
+        });
     });
 });
