@@ -14,4 +14,9 @@ class StudentController extends Controller
             'student' => $student
         ]);
     }
+
+    public function delete($studentId, Request $request) {
+        Student::destroy($studentId);
+        return back();
+    }
 }

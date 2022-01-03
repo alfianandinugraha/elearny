@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function() {
 
         Route::prefix('student')->group(function() {
             Route::get('/', [Admin\StudentController::class, 'get']);
+            Route::delete('/delete/{studentId}', [Admin\StudentController::class, 'delete']);
         });
     });
 });
