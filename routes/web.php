@@ -24,6 +24,8 @@ Route::get('/admin/dashboard', [Admin\DashboardController::class, 'get'])
 
 Route::get('/admin/login', [Admin\AuthController::class, 'get'])->middleware('guest:admin');
 
+Route::get('/admin/lecturers', [Admin\LecturerController::class, 'get'])->middleware('auth:admin');
+
 Route::delete('/admin/logout', [Admin\AuthController::class, 'logout'])->middleware('auth:admin');
 
 Route::post('/admin/login', [Admin\AuthController::class, 'attempt'])->middleware('guest:admin');
