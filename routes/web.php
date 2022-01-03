@@ -32,6 +32,10 @@ Route::prefix('admin')->group(function() {
             Route::get('/update/{lecturerId}', [Admin\LecturerController::class, 'edit']);
             Route::put('/update/{lecturerId}', [Admin\LecturerController::class, 'update']);
         });
+
+        Route::prefix('student')->group(function() {
+            Route::get('/', [Admin\StudentController::class, 'get']);
+        });
     });
 });
 
