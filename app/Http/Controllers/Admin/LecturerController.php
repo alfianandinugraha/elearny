@@ -10,7 +10,7 @@ class LecturerController extends Controller
 {
     public function get() {
         $lecturers = Lecturer::all();
-        return view('admin.lecturer.main', [
+        return view('pages.admin.lecturer.main', [
             'lecturers' => $lecturers,
         ]);
     }

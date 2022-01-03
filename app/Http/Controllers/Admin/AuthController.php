@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function get() {
-        return view('login-admin');
+        return view('pages.admin.login');
     }
 
     public function attempt(Request $request) {

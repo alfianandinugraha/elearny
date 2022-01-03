@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function get() {
         $lecturers = Lecturer::all();
         $student = Student::all();
-        return view('welcome', [
+        return view('pages.dashboard', [
             'lecturers' => $lecturers,
             'student' => $student
         ]);
