@@ -28,6 +28,19 @@ class LecturerController extends Controller
         ]);
     }
 
+    public function update($lecturerId, Request $request) {
+        $payload = $request->validate([
+            'lecturer_number' => ['required'],
+            'fullname' => ['required'],
+            'email' => ['required'],
+            'gender' => ['required'],
+        ]);
+
+        Lecturer::query()->where('lecturer_id', $lecturerId)->update($payload);
+
+        return back();
+    }
+
     public function store(Request $request) {
         $payload = $request->validate([
             'lecturer_number' => ['required'],
