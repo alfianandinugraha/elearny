@@ -28,6 +28,8 @@ Route::get('/admin/lecturers', [Admin\LecturerController::class, 'get'])->middle
 
 Route::get('/admin/lecturers/add', [Admin\LecturerController::class, 'add'])->middleware('auth:admin');
 
+Route::post('/admin/lecturers/add', [Admin\LecturerController::class, 'store'])->middleware('auth:admin');
+
 Route::delete('/admin/logout', [Admin\AuthController::class, 'logout'])->middleware('auth:admin');
 
 Route::post('/admin/login', [Admin\AuthController::class, 'attempt'])->middleware('guest:admin');

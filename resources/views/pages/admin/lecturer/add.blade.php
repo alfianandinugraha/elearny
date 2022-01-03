@@ -12,13 +12,15 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./add">
+                    <form action="./add" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label>NIP</label>
                             <input 
                                 type="number" 
                                 class="form-control"
                                 placeholder="Nomor Induk Pengajar"
+                                value="1112817380"
                                 name="lecturer_number" />
                         </div>
                         <div class="form-group">
@@ -27,6 +29,7 @@
                                 type="text" 
                                 class="form-control"
                                 placeholder="Masukkan nama lengkap"
+                                value="Dr. Lewis Morissette II"
                                 name="fullname" />
                         </div>
                         <div class="form-group">
@@ -35,6 +38,7 @@
                                 type="email" 
                                 class="form-control"
                                 placeholder="Masukkan email"
+                                value="brielle56@yahoo.com"
                                 name="email" />
                         </div>
                         <div>
@@ -45,6 +49,7 @@
                                     name="gender"
                                     id="radio-male" 
                                     value="male"
+                                    checked
                                 >
                                 <label class="form-check-label" for="radio-male">Pria</label>
                             </div>
@@ -65,6 +70,7 @@
                                 type="password" 
                                 class="form-control"
                                 placeholder="Masukkan password"
+                                value="hello"
                                 name="password" />
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
