@@ -12,8 +12,8 @@ class AuthService {
       if (Auth::guard($role)->check()) {
         return $role;
       }
-
-      return '';
     };
+
+    return '';
   }
 }
