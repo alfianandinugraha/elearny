@@ -42,4 +42,9 @@ class LecturerController extends Controller
 
         return redirect('/admin/lecturers');
     }
+
+    public function delete($lecturerId, Request $request) {
+        Lecturer::destroy($lecturerId);
+        return back();
+    }
 }

@@ -30,6 +30,8 @@ Route::get('/admin/lecturers/add', [Admin\LecturerController::class, 'add'])->mi
 
 Route::post('/admin/lecturers/add', [Admin\LecturerController::class, 'store'])->middleware('auth:admin');
 
+Route::delete('/admin/lecturers/delete/{lecturerId}', [Admin\LecturerController::class, 'delete'])->middleware('auth:admin');
+
 Route::delete('/admin/logout', [Admin\AuthController::class, 'logout'])->middleware('auth:admin');
 
 Route::post('/admin/login', [Admin\AuthController::class, 'attempt'])->middleware('guest:admin');
