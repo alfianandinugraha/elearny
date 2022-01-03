@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
 
+@section('heading', 'List Dosen')
+
 @section('content')
     @auth('admin')
     <div class="row">
@@ -7,11 +9,8 @@
             <div class="card shadow mb-4">
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        List Dosen
-                    </h6>
                     <a 
-                        class="ml-auto btn btn-primary"
+                        class="mr-auto btn btn-primary"
                         href="./lecturers/add"
                     >Tambah Dosen</a>
                 </div>

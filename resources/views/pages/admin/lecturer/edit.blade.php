@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
 
+@section('heading', 'Edit Dosen')
+
 @section('content')
     @auth('admin')
     <div class="row">
@@ -8,7 +10,7 @@
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        Edit Dosen
+                        Formulir
                     </h6>
                 </div>
                 <div class="card-body">
