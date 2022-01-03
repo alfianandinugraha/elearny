@@ -14,4 +14,8 @@ class LecturerController extends Controller
             'lecturers' => $lecturers,
         ]);
     }
+
+    public function add() {
+        return view('pages.admin.lecturer.add');
+    }
 }
