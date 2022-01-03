@@ -15,6 +15,10 @@ class StudentController extends Controller
         ]);
     }
 
+    public function add() {
+        return view('pages.admin.student.add');
+    }
+
     public function delete($studentId, Request $request) {
         Student::destroy($studentId);
         return back();
