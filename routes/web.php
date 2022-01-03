@@ -57,5 +57,6 @@ Route::prefix('lecturer')->group(function() {
 
     Route::middleware('auth:lecturer')->group(function() {
         Route::get('/dashboard', [Lecturer\DashboardController::class, 'get']);
+        Route::delete('/logout', [Lecturer\AuthController::class, 'logout']);
     });
 });

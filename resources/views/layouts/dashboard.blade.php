@@ -47,7 +47,7 @@
                     </button>
                 </div>
                 <div class="modal-body">Klik button "Logout" untuk keluar dari aplikasi</div>
-                <form class="modal-footer" action="/admin/logout" method="POST">
+                <form class="modal-footer" action="/{{$authService->currentRole()}}/logout" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
