@@ -14,4 +14,13 @@ class Student extends Model
     protected $primaryKey = 'student_id';
 
     protected $keyType = 'string';
+
+    protected $fillable = [
+        'student_id',
+        'student_number',
+        'fullname',
+        'email',
+        'password',
+        'gender'
+    ];
 }
