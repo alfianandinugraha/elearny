@@ -30,16 +30,16 @@
                                             <input 
                                                 type="text" 
                                                 class="form-control form-control-user"
-                                                placeholder="Username"
-                                                value="merry"
-                                                name="username" />
+                                                placeholder="NIP"
+                                                value="1112817380"
+                                                name="lecturer_number" />
                                         </div>
                                         <div class="form-group">
                                             <input 
                                                 type="password" 
                                                 class="form-control form-control-user"
                                                 placeholder="Password"
-                                                value="dosen"
+                                                value="hello"
                                                 name="password" />
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
