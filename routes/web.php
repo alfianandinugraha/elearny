@@ -54,4 +54,8 @@ Route::prefix('lecturer')->group(function() {
         Route::get('/login', [Lecturer\AuthController::class, 'get']);
         Route::post('/login', [Lecturer\AuthController::class, 'attempt']);
     });
+
+    Route::middleware('auth:lecturer')->group(function() {
+        Route::get('/dashboard', [Lecturer\DashboardController::class, 'get']);
+    });
 });
