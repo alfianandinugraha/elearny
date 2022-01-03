@@ -19,10 +19,14 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'get'])->middleware('guest');
 
 Route::prefix('admin')->group(function() {
-    Route::get('/login', [Admin\AuthController::class, 'get'])->middleware('guest:admin');
+    Route::middleware('guest:admin')->group(function() {
+        Route::get('/login', [Admin\AuthController::class, 'get']);
+        Route::post('/login', [Admin\AuthController::class, 'attempt']);
+    });
 
     Route::middleware('auth:admin')->group(function() {
         Route::get('/dashboard', [Admin\DashboardController::class, 'get'])->name('admin-dashboard');
+        Route::delete('/logout', [Admin\AuthController::class, 'logout']);
     
         Route::prefix('lecturers')->group(function() {
             Route::get('/', [Admin\LecturerController::class, 'get']);
@@ -43,12 +47,3 @@ Route::prefix('admin')->group(function() {
         });
     });
 });
-
-
-
-
-
-
-Route::delete('/admin/logout', [Admin\AuthController::class, 'logout'])->middleware('auth:admin');
-
-Route::post('/admin/login', [Admin\AuthController::class, 'attempt'])->middleware('guest:admin');
