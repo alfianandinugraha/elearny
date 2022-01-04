@@ -31,13 +31,13 @@
     @auth('admin')
     <li class="nav-item">
         <a class="nav-link collapsed" href="/admin/student">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fa-users"></i>
             <span>Mahasiswa</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="/admin/lecturers">
-            <i class="fas fa-fw fa-wrench"></i>
+            <i class="fas fa-fw fa-chalkboard-teacher"></i>
             <span>Dosen</span>
         </a>
     </li>
