@@ -14,4 +14,11 @@ class CourseController extends Controller
             'courses' => $courses
         ]);
     }
+
+    public function add() {
+        $semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+        return view('pages.admin.courses.add', [
+            'semesters' => $semesters
+        ]);
+    }
 }
