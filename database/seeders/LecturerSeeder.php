@@ -19,7 +19,16 @@ class LecturerSeeder extends Seeder
     {
         DB::table('lecturers')->truncate();
 
-        for($i = 0; $i < 3; $i++) {
+        DB::table('lecturers')->insert([
+            'lecturer_id' => '299e3f0c-cb30-4d14-981a-3dcea6c8e73f',
+            'lecturer_number' => '1112817380',
+            'password' => Hash::make('hello'),
+            'email' => 'shanny.tromp@braun.com',
+            'fullname' => 'Frederick Schulist',
+            'gender' => 'male'
+        ]);
+
+        for($i = 1; $i <= 3; $i++) {
             $faker = Factory::create();
 
             DB::table('lecturers')->insert([
