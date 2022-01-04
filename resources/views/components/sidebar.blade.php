@@ -50,15 +50,9 @@
     @endauth
     @auth('lecturer')
     <li class="nav-item">
-        <a class="nav-link collapsed" href="/lecturer/courses">
+        <a class="nav-link collapsed" href="/lecturer/classes">
             <i class="fas fa-chalkboard"></i>
-            <span>Mata Kuliah</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="/lecturer/student">
-            <i class="fas fa-users"></i>
-            <span>Mahasiswa</span>
+            <span>Kelas</span>
         </a>
     </li>
     <li class="nav-item">
