@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class CourseController extends Controller
 {
@@ -20,5 +21,23 @@ class CourseController extends Controller
         return view('pages.admin.courses.add', [
             'semesters' => $semesters
         ]);
+    }
+
+    public function store(Request $request) {
+        $payload = $request->validate([
+            'course_id' => ['required'],
+            'name' => ['required'],
+            'description' => ['required'],
+            'semester' => ['required'],
+        ]);
+        
+        $isIdFound = Course::all()->where('course_id', $payload['course_id'])->first();
+        if ($isIdFound) {
+            return back();
+        }
+
+        Course::query()->create($payload)->save();
+
+        return redirect('/admin/courses');
     }
 }

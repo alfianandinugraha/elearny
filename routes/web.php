@@ -50,6 +50,7 @@ Route::prefix('admin')->group(function() {
         Route::prefix('courses')->group(function() {
             Route::get('/', [Admin\CourseController::class, 'get']);
             Route::get('/add', [Admin\CourseController::class, 'add']);
+            Route::post('/add', [Admin\CourseController::class, 'store']);
         });
     });
 });
