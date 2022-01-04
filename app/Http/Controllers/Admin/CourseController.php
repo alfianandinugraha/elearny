@@ -34,13 +34,14 @@ class CourseController extends Controller
 
     public function store(Request $request) {
         $payload = $request->validate([
-            'course_id' => ['required'],
+            'code' => ['required'],
             'name' => ['required'],
             'description' => ['required'],
             'semester' => ['required'],
         ]);
+        $payload['course_id'] = Uuid::uuid4();
         
-        $isIdFound = Course::all()->where('course_id', $payload['course_id'])->first();
+        $isIdFound = Course::all()->where('code', $payload['code'])->first();
         if ($isIdFound) {
             return back();
         }

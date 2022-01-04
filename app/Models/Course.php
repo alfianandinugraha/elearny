@@ -21,7 +21,8 @@ class Course extends Model
         'course_id',
         'name',
         'description',
-        'semester'
+        'semester',
+        'code'
     ];
 
     public function lecturers() {

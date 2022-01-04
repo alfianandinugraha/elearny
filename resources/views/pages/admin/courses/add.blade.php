@@ -23,7 +23,7 @@
                                 class="form-control"
                                 placeholder="Kode mata kuliah"
                                 value="RWEB"
-                                name="course_id" />
+                                name="code" />
                         </div>
                         <div class="form-group">
                             <label>Nama</label>

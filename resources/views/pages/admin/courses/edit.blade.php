@@ -22,8 +22,8 @@
                                 type="text" 
                                 class="form-control"
                                 placeholder="Kode mata kuliah"
-                                value="{{$course->course_id}}"
-                                name="course_id" />
+                                value="{{$course->code}}"
+                                name="code" />
                         </div>
                         <div class="form-group">
                             <label>Nama</label>

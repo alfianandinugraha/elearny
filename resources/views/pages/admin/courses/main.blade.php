@@ -27,8 +27,8 @@
                         </thead>
                         <tbody>
                         @foreach($courses as $course)
-                            <tr>
-                                <td>{{$course->course_id}}</td>
+                            <tr id="{{$course->course_id}}">
+                                <td>{{$course->code}}</td>
                                 <td>{{$course->name}}</td>
                                 <td>{{$course->description}}</td>
                                 <td>{{$course->semester}}</td>

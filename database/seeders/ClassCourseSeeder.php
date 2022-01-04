@@ -25,7 +25,7 @@ class ClassCourseSeeder extends Seeder
             DB::table('class_courses')->insert(            [
                 'class_course_id' =>$item,
                 'lecturer_id' => '299e3f0c-cb30-4d14-981a-3dcea6c8e73f',
-                'course_id' => 'MPPL',
+                'course_id' => 'e48a428c-cee3-42ef-ac96-d163daf9d939',
                 'class' => 'A'
             ]);
         }
