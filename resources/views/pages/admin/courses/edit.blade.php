@@ -14,8 +14,9 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./add" method="POST">
+                    <form action="./{{$course->course_id}}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label>Kode</label>
                             <input 
@@ -55,7 +56,7 @@
                             >{{$course->description}}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
-                            Tambah
+                            Update
                         </button>
                     </form>
                 </div>
