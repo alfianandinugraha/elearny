@@ -20,4 +20,10 @@ class Lecturer extends Authenticatable
     protected $hidden = [
         'password',
     ];
+    
+    public $incrementing = false;
+
+    public function courses() {
+        return $this->belongsToMany(Course::class, 'class_courses', 'lecturer_id', 'course_id');
+    }
 }
