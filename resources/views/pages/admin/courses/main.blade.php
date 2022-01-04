@@ -31,7 +31,7 @@
                                 <td>{{$course->course_id}}</td>
                                 <td>{{$course->name}}</td>
                                 <td>{{$course->description}}</td>
-                                <td>6</td>
+                                <td>{{$course->semester}}</td>
                                 <td class="d-flex">
                                     <a 
                                         class="btn btn-outline-primary mr-2"
