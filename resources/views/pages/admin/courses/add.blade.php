@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label>Kode</label>
                             <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control"
                                 placeholder="Kode mata kuliah"
                                 value="RWEB"
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group mt-2">
                             <label>Semester</label>
-                            <select class="form-control">
+                            <select class="form-control" name="semester">
                                 @foreach($semesters as $semester)
                                     <option value="{{$semester}}">{{$semester}}</option>
                                 @endforeach
@@ -47,7 +47,7 @@
                             <textarea 
                                 class="form-control"
                                 placeholder="Deskripsi mata kuliah"
-                                value="brielle56@yahoo.com"
+                                name="description"
                                 rows="4"
                             >Itaque omnis in est quia. Ea nihil quod et cum. Et optio quae enim.</textarea>
                         </div>
