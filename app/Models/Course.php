@@ -17,6 +17,13 @@ class Course extends Model
 
     public $incrementing = false;
 
+    protected $fillable = [
+        'course_id',
+        'name',
+        'description',
+        'semester'
+    ];
+
     public function lecturers() {
         return $this->belongsToMany(Lecturer::class, 'class_courses', 'course_id', 'lecturer_id');
     }
