@@ -9,6 +9,11 @@ use Ramsey\Uuid\Uuid;
 
 class ClassCourseSeeder extends Seeder
 {
+    public static $items = [
+        '299e3f0c-cb30-4d14-981a-3dcea6c8e73f',
+        'ef07d35b-ed72-475e-8f78-298087221d78'
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -16,17 +21,13 @@ class ClassCourseSeeder extends Seeder
      */
     public function run()
     {
-        $classCourses = [
-            [
-                'class_course_id' => Uuid::uuid4(),
+        foreach (ClassCourseSeeder::$items as $item) {
+            DB::table('class_courses')->insert(            [
+                'class_course_id' =>$item,
                 'lecturer_id' => '299e3f0c-cb30-4d14-981a-3dcea6c8e73f',
                 'course_id' => 'MPPL',
                 'class' => 'A'
-            ]
-        ];
-
-        foreach ($classCourses as $classCourse) {
-            DB::table('class_courses')->insert($classCourse);
+            ]);
         }
     }
 }
