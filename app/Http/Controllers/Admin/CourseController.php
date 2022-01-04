@@ -51,6 +51,19 @@ class CourseController extends Controller
         return redirect('/admin/courses');
     }
 
+    public function update($courseId, Request $request) {
+        $payload = $request->validate([
+            'code' => ['required'],
+            'name' => ['required'],
+            'description' => ['required'],
+            'semester' => ['required'],
+        ]);
+
+        Course::query()->where('course_id', $courseId)->update($payload);
+
+        return back();
+    }
+
     public function delete($courseId, Request $request) {
         Course::destroy($courseId);
         return back();
