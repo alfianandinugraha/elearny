@@ -40,4 +40,9 @@ class CourseController extends Controller
 
         return redirect('/admin/courses');
     }
+
+    public function delete($courseId, Request $request) {
+        Course::destroy($courseId);
+        return back();
+    }
 }
