@@ -47,6 +47,12 @@
             <span>Mata Kuliah</span>
         </a>
     </li>
+        <li class="nav-item">
+        <a class="nav-link collapsed" href="/admin/classes">
+            <i class="fas fa-university"></i>
+            <span>Kelas</span>
+        </a>
+    </li>
     @endauth
     @auth('lecturer')
     <li class="nav-item">
