@@ -16,4 +16,12 @@ class ClassCourse extends Model
     protected $keyType = 'string';
 
     public $incrementing = false;
+
+    protected $fillable = [
+        'class',
+        'token',
+        'lecturer_id',
+        'class_course_id',
+        'course_id'
+    ];
 }
