@@ -89,6 +89,7 @@ class ClassCourseController extends Controller
 
         $classCourse = DB::table('student_courses')
             ->where('student_courses.class_course_id', $classCourseId)
+            ->where('student_courses.student_id', $studentId)
             ->where('class_courses.token', $validateData['token'])
             ->join('class_courses', 'class_courses.class_course_id', '=', 'student_courses.class_course_id')
             ->first();
@@ -96,7 +97,7 @@ class ClassCourseController extends Controller
         if ($classCourse) return back();
 
         $payload = [
-            'student_course_id' => Uuid::uuid4(),
+            'student_course_id' => uniqid(),
             'class_course_id' => $classCourseId,
             'student_id' => $studentId
         ];
