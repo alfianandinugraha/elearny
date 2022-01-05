@@ -58,6 +58,7 @@
     </div>
 
     @include('components/scripts')
+    @yield('scripts')
 
 </body>
 
