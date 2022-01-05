@@ -62,5 +62,19 @@
         </a>
     </li>
     @endauth
+    @auth('student')
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/student/classes">
+            <i class="fas fa-chalkboard"></i>
+            <span>Kelas</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/student/tasks">
+            <i class="fas fa-scroll"></i>
+            <span>Tugas</span>
+        </a>
+    </li>
+    @endauth
 
 </ul>

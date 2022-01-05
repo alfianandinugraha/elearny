@@ -85,5 +85,9 @@ Route::prefix('student')->group(function() {
 
     Route::middleware('auth:student')->group(function() {
         Route::get('/dashboard', [Student\DashboardController::class, 'get']);
+
+        Route::prefix('classes')->group(function() {
+            Route::get('/', [Student\ClassCourseController::class, 'get']);
+        });
     });
 });
