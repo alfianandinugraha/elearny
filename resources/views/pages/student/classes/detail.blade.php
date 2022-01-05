@@ -54,7 +54,7 @@ Kelas <b>{{$course->name}}</b>
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">
-                        Hapus Kelas
+                        Keluar Kelas
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -62,12 +62,12 @@ Kelas <b>{{$course->name}}</b>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>Apakah kamu ingin menghapus kelas ini ?</p>
+                        <p>Apakah kamu ingin keluar dari kelas <b class="class-name"></b> ?</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
+                    <button type="submit" class="btn btn-danger">Keluar</button>
                 </div>
             </div>
         </form>
@@ -80,6 +80,7 @@ Kelas <b>{{$course->name}}</b>
             const courseClassName = button.data('class-name')
             const modal = $(this)
             modal.find('#form')[0].action = `${studentCourseId}`
+            modal.find('.class-name').text(courseClassName)
         })
     </script>
     @endsection
