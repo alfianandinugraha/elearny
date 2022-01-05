@@ -78,5 +78,8 @@ Route::prefix('lecturer')->group(function() {
 });
 
 Route::prefix('student')->group(function() {
-    Route::get('/login', [Student\AuthController::class, 'get']);
+    Route::middleware('guest:student')->group(function() {
+        Route::get('/login', [Student\AuthController::class, 'get']);
+        Route::post('/login', [Student\AuthController::class, 'attempt']);
+    });
 });
