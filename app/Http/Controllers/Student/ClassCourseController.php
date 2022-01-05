@@ -26,4 +26,18 @@ class ClassCourseController extends Controller
             'classCourses' => $classCourses
         ]);
     }
+
+    public function search() {
+        $classCourses = DB::table('class_courses')
+            ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
+            ->join('lecturers', 'lecturers.lecturer_id', '=', 'class_courses.lecturer_id')
+            ->select([
+                'courses.code', 'courses.name', 'courses.description', 'courses.semester', 'class_courses.class', 'class_courses.class_course_id', 'lecturers.fullname as lecturer_name'
+            ])
+            ->get();
+
+        return view('pages.student.classes.search', [
+            'classCourses' => $classCourses
+        ]);
+    }
 }

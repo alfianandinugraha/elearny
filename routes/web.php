@@ -88,6 +88,7 @@ Route::prefix('student')->group(function() {
 
         Route::prefix('classes')->group(function() {
             Route::get('/', [Student\ClassCourseController::class, 'get']);
+            Route::get('/search', [Student\ClassCourseController::class, 'search']);
         });
     });
 });
