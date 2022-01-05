@@ -90,6 +90,7 @@ Route::prefix('student')->group(function() {
         Route::prefix('classes')->group(function() {
             Route::get('/', [Student\ClassCourseController::class, 'get']);
             Route::get('/search', [Student\ClassCourseController::class, 'search']);
+            Route::get('/{classCourseId}', [Student\ClassCourseController::class, 'detail']);
             Route::post('/{classCourseId}/pick', [Student\ClassCourseController::class, 'pick']);
         });
     });

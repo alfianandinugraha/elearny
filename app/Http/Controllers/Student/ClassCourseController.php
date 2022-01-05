@@ -54,6 +54,26 @@ class ClassCourseController extends Controller
         ]);
     }
 
+    public function detail($classCourseId) {
+        $studentId = Auth::guard('student')->id();
+        $studentCourse = DB::table('student_courses')
+            ->where('student_courses.student_id', '=', $studentId)
+            ->where('student_courses.class_course_id', '=', $classCourseId)
+            ->join('class_courses', 'class_courses.class_course_id', '=', 'student_courses.class_course_id')
+            ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
+            ->join('lecturers', 'class_courses.lecturer_id', '=', 'lecturers.lecturer_id')
+            ->select([
+                'courses.code', 'courses.description', 'courses.name', 'class_courses.class', 'courses.semester',
+                'student_courses.student_course_id', 'lecturers.fullname AS lecturer_name', 'lecturers.email AS lecturer_email'
+            ])
+            ->get()
+            ->first();
+
+        return view("pages.student.classes.detail", [
+            'course' => $studentCourse
+        ]);
+    }
+
     public function pick($classCourseId, Request $request) {
         $validateData = $request->validate([
             'token' => ['required']
