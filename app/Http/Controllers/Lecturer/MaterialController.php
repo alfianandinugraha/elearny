@@ -28,11 +28,14 @@ class MaterialController extends Controller
     }
 
     public function add() {
+        $lecturerId = Auth::guard('lecturer')->id();
+
         $classes = ['A', 'B', 'C', 'D'];
-        $courses = Course::query()
-            ->get([
-                'courses.course_id', 'courses.name', 'courses.code'
-            ]);
+        $courses = DB::table('class_courses')
+            ->where('class_courses.lecturer_id', '=', $lecturerId)
+            ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
+            ->select(['courses.course_id', 'courses.name', 'courses.code'])
+            ->get();
 
         return view('pages.lecturer.materials.add', [
             'classes' => $classes,
