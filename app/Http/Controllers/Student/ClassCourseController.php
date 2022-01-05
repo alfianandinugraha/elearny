@@ -104,4 +104,9 @@ class ClassCourseController extends Controller
         StudentCourse::query()->create($payload)->save();
         return back();
     }
+
+    public function delete($studentCourseId) {
+        StudentCourse::destroy($studentCourseId);
+        return redirect('/student/classes');
+    }
 }

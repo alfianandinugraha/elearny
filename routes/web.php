@@ -91,6 +91,7 @@ Route::prefix('student')->group(function() {
             Route::get('/', [Student\ClassCourseController::class, 'get']);
             Route::get('/search', [Student\ClassCourseController::class, 'search']);
             Route::get('/{classCourseId}', [Student\ClassCourseController::class, 'detail']);
+            Route::delete('/{classCourseId}', [Student\ClassCourseController::class, 'delete']);
             Route::post('/{classCourseId}/pick', [Student\ClassCourseController::class, 'pick']);
         });
     });
