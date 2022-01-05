@@ -53,7 +53,9 @@ class ClassCourseController extends Controller
             ->get()
             ->first();
 
-        if ($isPicked) return back();
+        if ($isPicked) return back()->withErrors([
+            'classAlreadyExist' => 'Kelas sudah diambil'
+        ]);
 
         $validateData['class_course_id'] = uniqid();
         ClassCourse::query()->create($validateData)->save();

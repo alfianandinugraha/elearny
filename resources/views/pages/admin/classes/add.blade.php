@@ -44,6 +44,9 @@
                                 @endforeach
                             </select>
                         </div>
+                        @error('classAlreadyExist')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
                         <button type="submit" class="btn btn-primary w-100">
                             Tambah
                         </button>
