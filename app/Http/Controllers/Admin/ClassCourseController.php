@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassCourse;
 use App\Models\Course;
 use App\Models\Lecturer;
 use Illuminate\Http\Request;
@@ -36,5 +37,27 @@ class ClassCourseController extends Controller
             'courses' => $courses,
             'classes' => $classes
         ]);
+    }
+
+    public function store(Request $request) {
+        $validateData = $request->validate([
+            'lecturer_id' => ['required'],
+            'course_id' => ['required'],
+            'class' => ['required'],
+        ]);
+
+        $isPicked = ClassCourse::query()
+            ->where('lecturer_id', '=', $validateData['lecturer_id'])
+            ->where('course_id', '=', $validateData['course_id'])
+            ->where('class', '=', $validateData['class'])
+            ->get()
+            ->first();
+
+        if ($isPicked) return back();
+
+        $validateData['class_course_id'] = uniqid();
+        ClassCourse::query()->create($validateData)->save();
+
+        return redirect('/admin/classes');
     }
 }
