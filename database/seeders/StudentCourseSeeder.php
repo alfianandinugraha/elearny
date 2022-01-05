@@ -17,7 +17,7 @@ class StudentCourseSeeder extends Seeder
     {
         foreach (StudentSeeder::$items as $item) {
             DB::table('student_courses')->insert([
-                'student_course_id' => Uuid::uuid4(),
+                'student_course_id' => uniqid(),
                 'class_course_id' => ClassCourseSeeder::$items[0],
                 'student_id' => $item
             ]);

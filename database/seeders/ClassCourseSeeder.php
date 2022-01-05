@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 class ClassCourseSeeder extends Seeder
 {
     public static $items = [
-        'd11e4389-dd38-4026-a132-0177093a47b1',
+        '61d5b18ad1154',
     ];
 
     /**
@@ -23,7 +23,7 @@ class ClassCourseSeeder extends Seeder
         DB::table('class_courses')->truncate();
 
         DB::table('class_courses')->insert([
-            'class_course_id' => Uuid::uuid4(),
+            'class_course_id' => uniqid(),
             'lecturer_id' => '299e3f0c-cb30-4d14-981a-3dcea6c8e73f',
             'course_id' => 'd11e4389-dd38-4026-a132-0177093a47b1',
             'class' => 'B'
