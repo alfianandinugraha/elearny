@@ -49,13 +49,6 @@
                                         class="btn btn-outline-primary mr-2"
                                         href="./classes/{{$course->class_course_id}}/update"
                                     >Update</a>
-                                    <form 
-                                        action="./classes/{{$course->class_course_id}}/delete" method="POST"
-                                    >
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-outline-danger">Hapus</button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
