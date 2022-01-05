@@ -39,4 +39,14 @@ class MaterialController extends Controller
             'courses' => $courses
         ]);
     }
+
+    public function store(Request $request) {
+        $validateData = $request->validate([
+            'title' => ['required'],
+            'course_id' => ['required'],
+            'class' => ['required'],
+            'content' => ['required']
+        ]);
+        return redirect('/lecturer/materials');
+    }
 }

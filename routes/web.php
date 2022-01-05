@@ -84,6 +84,7 @@ Route::prefix('lecturer')->group(function() {
         Route::prefix('materials')->group(function() {
             Route::get('/', [Lecturer\MaterialController::class, 'get']);
             Route::get('/add', [Lecturer\MaterialController::class, 'add']);
+            Route::post('/add', [Lecturer\MaterialController::class, 'store']);
         });
     });
 });
