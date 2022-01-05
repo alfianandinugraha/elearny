@@ -82,4 +82,8 @@ Route::prefix('student')->group(function() {
         Route::get('/login', [Student\AuthController::class, 'get']);
         Route::post('/login', [Student\AuthController::class, 'attempt']);
     });
+
+    Route::middleware('auth:student')->group(function() {
+        Route::get('/dashboard', [Student\DashboardController::class, 'get']);
+    });
 });
