@@ -38,10 +38,49 @@ Kelas <b>{{$course->name}}</b>
                     <p>{{$course->description}}</p>
                     <button 
                         class="ml-auto btn btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#modalDelete"
+                        data-student-course-id="{{$course->student_course_id}}"
+                        data-class-name="{{$course->name}}"
                     >Keluar Kelas</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitle" aria-hidden="true">
+        <form class="modal-dialog modal-dialog-centered" role="document" id="form" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">
+                        Hapus Kelas
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>Apakah kamu ingin menghapus kelas ini ?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    @section('scripts')
+    <script>
+        $('#modalDelete').on('show.bs.modal', function (e) {
+            const button = $(e.relatedTarget)
+            const courseClassId = button.data('student-course-id')
+            const courseClassName = button.data('class-name')
+            const modal = $(this)
+            modal.find('#form')[0].action = `${courseClassId}/pick`
+        })
+    </script>
+    @endsection
     @endauth
 @endsection
