@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Lecturer;
+use App\Http\Controllers\Student;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -74,4 +75,8 @@ Route::prefix('lecturer')->group(function() {
             Route::put('/{classCourseId}/update', [Lecturer\ClassCourseController::class, 'update']);
         });
     });
+});
+
+Route::prefix('student')->group(function() {
+    Route::get('/login', [Student\AuthController::class, 'get']);
 });

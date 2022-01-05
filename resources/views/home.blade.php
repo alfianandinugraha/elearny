@@ -25,7 +25,8 @@
                                         <h1 class="h4 text-gray-900 mb-4">Elearny</h1>
                                         <div class="d-flex justify-content-center">
                                             <a class="btn btn-primary mr-2" href="/admin/login">Login Admin</a>
-                                            <a class="btn btn-primary" href="/lecturer/login">Login Dosen</a>
+                                            <a class="btn btn-primary mr-2" href="/lecturer/login">Login Dosen</a>
+                                            <a class="btn btn-primary" href="/student/login">Login Mahasiswa</a>
                                         </div>
                                     </div>
                                 </div>
