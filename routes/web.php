@@ -80,6 +80,10 @@ Route::prefix('lecturer')->group(function() {
             Route::get('/{classCourseId}/update', [Lecturer\ClassCourseController::class, 'edit']);
             Route::put('/{classCourseId}/update', [Lecturer\ClassCourseController::class, 'update']);
         });
+
+        Route::prefix('materials')->group(function() {
+            Route::get('/', [Lecturer\MaterialController::class, 'get']);
+        });
     });
 });
 
