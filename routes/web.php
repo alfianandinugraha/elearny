@@ -75,6 +75,7 @@ Route::prefix('lecturer')->group(function() {
         Route::prefix('classes')->group(function() {
             Route::get('/', [Lecturer\ClassCourseController::class, 'get']);
             Route::get('/{classCourseId}/update', [Lecturer\ClassCourseController::class, 'edit']);
+            Route::put('/{classCourseId}/update', [Lecturer\ClassCourseController::class, 'update']);
         });
     });
 });

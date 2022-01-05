@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lecturer;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassCourse;
 use App\Models\Lecturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,5 +44,20 @@ class ClassCourseController extends Controller
             return view('pages.lecturer.classes.edit', [
                 'classCourse' => $classCourse
             ]);
+    }
+
+    public function update($classCourseId, Request $request) {
+        $validateData = $request->validate([
+            'token' => ['required']
+        ]);
+
+        $lecturerId = Auth::guard('lecturer')->id();
+        ClassCourse::query()
+            ->where('lecturer_id', $lecturerId)
+            ->where('class_course_id', $classCourseId)
+            ->update([
+                'token' => $validateData['token']
+            ]);
+        return back();
     }
 }
