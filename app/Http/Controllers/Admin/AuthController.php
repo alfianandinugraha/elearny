@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,7 @@ class AuthController extends Controller
     }
 
     public function attempt(Request $request) {
+        AuthService::logoutAll();
         $isValid = Auth::guard('admin')->attempt($request->only('username', 'password'));
         if (!$isValid) {
             return back();
@@ -22,7 +24,7 @@ class AuthController extends Controller
     }
 
     public function logout() {
-        Auth::guard('admin')->logout();
+        AuthService::logoutAll();
         return redirect('/admin/login');
     }
 }

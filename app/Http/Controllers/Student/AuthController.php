@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,7 @@ class AuthController extends Controller
             'password' => ['required']
         ]);
 
+        AuthService::logoutAll();
         $isValid = Auth::guard('student')->attempt($validateData);
 
         if (!$isValid) {
@@ -28,7 +30,7 @@ class AuthController extends Controller
     }
 
     public function logout() {
-        Auth::guard('student')->logout();
+        AuthService::logoutAll();
         return redirect('/student/login');
     }
 }

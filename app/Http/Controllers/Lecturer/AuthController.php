@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lecturer;
 
 use App\Http\Controllers\Controller;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,7 @@ class AuthController extends Controller
     }
 
     public function attempt(Request $request) {
+        AuthService::logoutAll();
         $isValid = Auth::guard('lecturer')->attempt($request->only('lecturer_number', 'password'));
 
         if (!$isValid) {
@@ -23,7 +25,7 @@ class AuthController extends Controller
     }
 
     public function logout() {
-        Auth::guard('lecturer')->logout();
+        AuthService::logoutAll();
         return redirect('/lecturer/login');
     }
 }
