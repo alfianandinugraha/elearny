@@ -50,6 +50,7 @@ Kelas <b>{{$course->name}}</b>
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitle" aria-hidden="true">
         <form class="modal-dialog modal-dialog-centered" role="document" id="form" method="POST">
             @csrf
+            @method('DELETE')
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">
@@ -75,10 +76,10 @@ Kelas <b>{{$course->name}}</b>
     <script>
         $('#modalDelete').on('show.bs.modal', function (e) {
             const button = $(e.relatedTarget)
-            const courseClassId = button.data('student-course-id')
+            const studentCourseId = button.data('student-course-id')
             const courseClassName = button.data('class-name')
             const modal = $(this)
-            modal.find('#form')[0].action = `${courseClassId}/pick`
+            modal.find('#form')[0].action = `${studentCourseId}`
         })
     </script>
     @endsection
