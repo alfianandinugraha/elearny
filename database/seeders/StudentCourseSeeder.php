@@ -15,6 +15,8 @@ class StudentCourseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('student_courses')->truncate();
+
         foreach (StudentSeeder::$items as $item) {
             DB::table('student_courses')->insert([
                 'student_course_id' => uniqid(),
