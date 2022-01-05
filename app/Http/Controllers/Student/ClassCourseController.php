@@ -93,7 +93,7 @@ class ClassCourseController extends Controller
             ->join('class_courses', 'class_courses.class_course_id', '=', 'student_courses.class_course_id')
             ->first();
 
-        if (!$classCourse) return back();
+        if ($classCourse) return back();
 
         $payload = [
             'student_course_id' => Uuid::uuid4(),
