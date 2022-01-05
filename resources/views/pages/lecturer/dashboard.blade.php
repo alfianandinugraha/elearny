@@ -69,6 +69,9 @@ Selamat Datang, <b>{{Auth::guard('lecturer')->user()->fullname}}</b> !
                     <h6 class="m-0 font-weight-bold text-primary">Kelas</h6>
                 </div>
                 <div class="card-body">
+                    @if(!count($classCourses))
+                    <p>Belum ada kelas</p>
+                    @else
                     <table class="table">
                         <thead>
                             <tr>
@@ -96,6 +99,7 @@ Selamat Datang, <b>{{Auth::guard('lecturer')->user()->fullname}}</b> !
                             @endforeach
                         </tbody>
                     </table>
+                    @endif
                 </div>
             </div>
         </div>
