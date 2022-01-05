@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lecturer;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassCourse;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,11 @@ class MaterialController extends Controller
 {
     public function get() {
         $lecturerId = Auth::guard('lecturer')->id();
+
+        $hasClass = ClassCourse::query()
+            ->where('class_courses.lecturer_id', '=', $lecturerId)
+            ->get()
+            ->count();
 
         $materials = DB::table('materials')
             ->join('class_courses', 'materials.class_course_id', '=', 'class_courses.class_course_id')
@@ -23,12 +29,20 @@ class MaterialController extends Controller
             ->get();
 
         return view('pages.lecturer.materials.main', [
-            'materials' => $materials
+            'materials' => $materials,
+            'hasClass' => $hasClass
         ]);
     }
 
     public function add() {
         $lecturerId = Auth::guard('lecturer')->id();
+
+        $hasClass = ClassCourse::query()
+            ->where('class_courses.lecturer_id', '=', $lecturerId)
+            ->get()
+            ->count();
+        
+        if (!$hasClass) return back();
 
         $classes = ['A', 'B', 'C', 'D'];
         $courses = DB::table('class_courses')

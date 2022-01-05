@@ -9,14 +9,27 @@
             <div class="card shadow mb-4">
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    @if($hasClass)
                     <a 
                         class="mr-auto btn btn-primary"
                         href="./materials/add"
                     >Tambah Materi</a>
+                    @else
+                    <button 
+                        class="mr-auto btn btn-primary"
+                        disabled
+                    >Belum ada kelas</button>
+                    @endif
                 </div>
                 <div class="card-body">
                     @if(!count($materials))
-                    <p>Tidak ada materi, silahkan tambah materi terlebih dahulu</p>
+                    <p>
+                        @if($hasClass)
+                        Tidak ada materi, silahkan tambah materi terlebih dahulu
+                        @else
+                        Tidak ada materi, silahkan hubungi Admin untuk mendapatkan kelas
+                        @endif
+                    </p>
                     @else
                     <table class="table">
                         <thead>
