@@ -26,4 +26,22 @@ class ClassCourseController extends Controller
             'courses' => $courses
         ]);
     }
+
+    public function edit($courseId) {
+        $lecturerId = Auth::guard('lecturer')->id();
+
+        $classCourse = DB::table('lecturers')
+            ->where('lecturers.lecturer_id', $lecturerId)
+            ->where('class_courses.class_course_id', $courseId)
+            ->join('class_courses', 'lecturers.lecturer_id', '=', 'class_courses.lecturer_id')
+            ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
+            ->select([
+                'class_courses.*', 'courses.name', 'courses.code', 'courses.semester'
+            ])
+            ->first();
+
+            return view('pages.lecturer.classes.edit', [
+                'classCourse' => $classCourse
+            ]);
+    }
 }
