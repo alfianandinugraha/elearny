@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Models\ClassCourse;
 use App\Models\StudentCourse;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,9 +32,18 @@ class ClassCourseController extends Controller
     }
 
     public function search() {
+        $studentId = Auth::guard('student')->id();
+
         $classCourses = DB::table('class_courses')
             ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
             ->join('lecturers', 'lecturers.lecturer_id', '=', 'class_courses.lecturer_id')
+            ->whereNotIn('class_courses.class_course_id', function (Builder $query) use ($studentId) {
+                $query
+                    ->select('class_course_id')
+                    ->from('student_courses')
+                    ->where('student_courses.student_id', '=', $studentId)
+                    ->get();
+            })
             ->select([
                 'courses.code', 'courses.name', 'courses.description', 'courses.semester', 'class_courses.class', 'class_courses.class_course_id', 'lecturers.fullname as lecturer_name'
             ])
