@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lecturer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,19 @@ class MaterialController extends Controller
 
         return view('pages.lecturer.materials.main', [
             'materials' => $materials
+        ]);
+    }
+
+    public function add() {
+        $classes = ['A', 'B', 'C', 'D'];
+        $courses = Course::query()
+            ->get([
+                'courses.course_id', 'courses.name', 'courses.code'
+            ]);
+
+        return view('pages.lecturer.materials.add', [
+            'classes' => $classes,
+            'courses' => $courses
         ]);
     }
 }
