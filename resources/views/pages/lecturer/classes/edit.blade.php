@@ -14,9 +14,18 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./{{$classCourse->class_course_id}}/update" method="POST">
+                    <form action="./update" method="POST">
                         @csrf
                         @method('PUT')
+                        <div class="form-group">
+                            <label>Token</label>
+                            <input 
+                                type="text" 
+                                class="form-control"
+                                placeholder="Masukkan token kelas"
+                                value="{{$classCourse->token}}"
+                                name="token" />
+                        </div>
                         <div class="form-group">
                             <label>Kode</label>
                             <input 
@@ -42,12 +51,12 @@
                                 disabled />
                         </div>
                         <div class="form-group">
-                            <label>Token</label>
+                            <label>Kelas</label>
                             <input 
                                 type="text" 
                                 class="form-control"
-                                value="MPPLA"
-                                name="token" />
+                                value="{{$classCourse->class}}"
+                                disabled />
                         </div>
                         <button type="submit" class="btn btn-primary mt-3 w-100">
                             Edit
