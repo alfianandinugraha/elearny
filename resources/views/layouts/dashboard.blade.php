@@ -5,6 +5,7 @@
 <head>
     @include('components/head')
     <title>Dashboard Admin - Elearny</title>
+    @yield('head')
 </head>
 
 <body id="page-top">
