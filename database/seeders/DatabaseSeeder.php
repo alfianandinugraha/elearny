@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             LecturerSeeder::class,
             CourseSeeder::class,
             ClassCourseSeeder::class,
-            StudentCourseSeeder::class
+            StudentCourseSeeder::class,
+            MaterialSeeder::class
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
