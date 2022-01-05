@@ -31,8 +31,7 @@
                                 <td>{{$classCourse->semester}}</td>
                                 <td>{{$classCourse->lecturer_name}}</td>
                                 <td class="d-flex">
-                                    <a 
-                                        href="./{{$classCourse->class_course_id}}"  
+                                    <button 
                                         class="btn btn-outline-primary mr-2"
                                         data-toggle="modal"
                                         data-target="#modalConfirm"
@@ -40,7 +39,7 @@
                                         data-class-name="{{$classCourse->name}}"
                                     >
                                         <i class="fas fa-sign-in-alt"></i>
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
