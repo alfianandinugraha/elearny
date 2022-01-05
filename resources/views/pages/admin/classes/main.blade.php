@@ -15,6 +15,9 @@
                     >Tambah Kelas</a>
                 </div>
                 <div class="card-body">
+                    @if(!count($classCourses))
+                    <p>Tidak ada kelas</p>
+                    @else
                     <table class="table">
                         <thead>
                             <tr>
@@ -26,7 +29,27 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach($classCourses as $classCourse)
+                            <tr>
+                                <td>{{$classCourse->code}}</td>
+                                <td>{{$classCourse->class}}</td>
+                                <td>{{$classCourse->name}}</td>
+                                <td>{{$classCourse->semester}}</td>
+                                <td>{{$classCourse->lecturer_name}}</td>
+                                <td class="d-flex">
+                                    <a 
+                                        href="./classes/{{$classCourse->class_course_id}}"  
+                                        class="btn btn-outline-primary mr-2"
+                                    >
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
+                    @endif
                 </div>
             </div>
         </div>
