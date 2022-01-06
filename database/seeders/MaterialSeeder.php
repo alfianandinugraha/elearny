@@ -22,6 +22,7 @@ class MaterialSeeder extends Seeder
                 'material_id' => uniqid(),
                 'title' => Factory::create()->text(20),
                 'content' => Factory::create()->realText(5000),
+                'filename' => 'example_61d5b18ad1157.pdf',
                 'class_course_id' => ClassCourseSeeder::$items[0]
             ]);
 
@@ -31,6 +32,7 @@ class MaterialSeeder extends Seeder
                     'material_id' => uniqid(),
                     'title' => Factory::create()->text(20),
                     'content' => Factory::create()->realText(5000),
+                    'filename' => 'example_61d5b18ad1157.pdf',
                     'class_course_id' => $item
                 ]);
         }

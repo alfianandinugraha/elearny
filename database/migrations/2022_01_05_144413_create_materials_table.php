@@ -17,6 +17,7 @@ class CreateMaterialsTable extends Migration
             $table->string('material_id');
             $table->string('title');
             $table->text('content');
+            $table->string('filename')->nullable();
             $table->string('class_course_id');
             $table->timestamps();
 
