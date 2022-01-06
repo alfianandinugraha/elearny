@@ -22,7 +22,7 @@
                                 type="number" 
                                 class="form-control"
                                 placeholder="Nomor Induk Pengajar"
-                                value="1112817380"
+                                value="1112817379"
                                 name="lecturer_number" />
                         </div>
                         <div class="form-group">
