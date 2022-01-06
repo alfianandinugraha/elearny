@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Lecturer;
 use App\Http\Controllers\Controller;
 use App\Models\ClassCourse;
 use App\Models\Course;
+use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MaterialController extends Controller
 {
@@ -62,8 +64,42 @@ class MaterialController extends Controller
             'title' => ['required'],
             'course_id' => ['required'],
             'class' => ['required'],
-            'content' => ['required']
+            'content' => ['required'],
+            'file' => ['file']
         ]);
+
+        $validateData['material_id'] = uniqid();
+
+        $file = $request->file('file');
+        $filename = "";
+
+        if ($file) {
+            unset($validateData['file']);
+
+            $filename = explode('.', $file->getClientOriginalName());
+            $ext = last($filename);
+            array_pop($filename);
+            $filename = implode("", $filename) . "_" . uniqid() . "." . $ext;
+
+            $validateData['filename'] = $filename;
+        }
+
+        $classCourse = ClassCourse::query()
+            ->where('course_id', $validateData['course_id'])
+            ->where('class', $validateData['class'])
+            ->get(['class_course_id'])
+            ->first();
+        
+        if (!$classCourse) return back()->withErrors([
+            'class_course_not_found' => 'Kelas tidak ditemukan'
+        ]);
+
+        $validateData['class_course_id'] = $classCourse->class_course_id;
+        $isSaved = Material::query()->create($validateData)->save();
+
+        if($isSaved && $filename) {
+            Storage::disk('materials')->put($filename, $file->get());
+        }
         return redirect('/lecturer/materials');
     }
 }
