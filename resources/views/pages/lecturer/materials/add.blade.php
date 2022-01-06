@@ -55,6 +55,13 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div>
+                                    <p class="mb-1">File</p>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="file">
+                                        <label class="custom-file-label" for="file">Pilih File</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
