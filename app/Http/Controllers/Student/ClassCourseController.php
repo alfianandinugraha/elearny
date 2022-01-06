@@ -96,14 +96,12 @@ class ClassCourseController extends Controller
         
         if ($hasClassCouse) return back();
 
-        $classCourse = DB::table('student_courses')
-            ->where('student_courses.class_course_id', $classCourseId)
-            ->where('student_courses.student_id', $studentId)
+        $classCourse = ClassCourse::query()
+            ->where('class_courses.class_course_id', $classCourseId)
             ->where('class_courses.token', $validateData['token'])
-            ->join('class_courses', 'class_courses.class_course_id', '=', 'student_courses.class_course_id')
             ->first();
 
-        if ($classCourse) return back();
+        if (!$classCourse) return back();
 
         $payload = [
             'student_course_id' => uniqid(),
