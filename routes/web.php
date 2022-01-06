@@ -106,5 +106,9 @@ Route::prefix('student')->group(function() {
             Route::delete('/{classCourseId}', [Student\ClassCourseController::class, 'delete']);
             Route::post('/{classCourseId}/pick', [Student\ClassCourseController::class, 'pick']);
         });
+
+        Route::prefix('materials')->group(function() {
+            Route::get('/{materialId}', [Student\MaterialController::class, 'detail']);
+        });
     });
 });
