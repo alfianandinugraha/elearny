@@ -22,7 +22,7 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./add" method="POST">
+                    <form action="./add" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-6">
@@ -55,13 +55,16 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div>
+                                <div class="form-group">
                                     <p class="mb-1">File</p>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="file">
+                                        <input type="file" class="custom-file-input" id="file" name="file">
                                         <label class="custom-file-label" for="file">Pilih File</label>
                                     </div>
                                 </div>
+                                @error('class_course_not_found')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
@@ -81,6 +84,11 @@
     @section('scripts')
     <script src="/js/ckeditor.js"></script>
     <script>
+        $('#file').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
+        });
+
         ClassicEditor.height = 500;
         ClassicEditor
             .create(document.querySelector('#editor'))
