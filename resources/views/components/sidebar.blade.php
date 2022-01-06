@@ -76,9 +76,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="/student/tasks">
-            <i class="fas fa-scroll"></i>
-            <span>Tugas</span>
+        <a class="nav-link collapsed" href="/student/materials">
+            <i class="fas fa-book"></i>
+            <span>Materi</span>
         </a>
     </li>
     @endauth
