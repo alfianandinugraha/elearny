@@ -7,6 +7,24 @@ Kelas <b>{{$course->name}}</b>
 @section('content')
     @auth('student')
     <div class="row">
+        <div class="col-9">
+            <div class="card shadow mb-4">
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <b>{{$course->name}}</b>
+                </div>
+                <div class="card-body">
+                    <p>{{$course->description}}</p>
+                    <button 
+                        class="ml-auto btn btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#modalDelete"
+                        data-student-course-id="{{$course->student_course_id}}"
+                        data-class-name="{{$course->name}}"
+                    >Keluar Kelas</button>
+                </div>
+            </div>
+        </div>
         <div class="col-3">
             <div class="card shadow mb-4">
                 <div
@@ -25,24 +43,6 @@ Kelas <b>{{$course->name}}</b>
                     <hr />
                     <b class="text-primary">Kode</b>
                     <p>{{$course->code}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-9">
-            <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <b>{{$course->name}}</b>
-                </div>
-                <div class="card-body">
-                    <p>{{$course->description}}</p>
-                    <button 
-                        class="ml-auto btn btn-outline-danger"
-                        data-toggle="modal"
-                        data-target="#modalDelete"
-                        data-student-course-id="{{$course->student_course_id}}"
-                        data-class-name="{{$course->name}}"
-                    >Keluar Kelas</button>
                 </div>
             </div>
         </div>
