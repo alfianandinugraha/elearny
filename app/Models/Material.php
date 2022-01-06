@@ -13,7 +13,7 @@ class Material extends Model
 
     protected $table = "materials";
 
-    protected $typeKey = "string";
+    protected $keyType = "string";
 
     protected $fillable = [
         'material_id',
