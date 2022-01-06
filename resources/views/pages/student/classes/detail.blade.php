@@ -1,12 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('heading')
-Kelas <b>{{$course->name}}</b>
+    @if(!$course)
+    Kelas tidak ditemukan
+    @else
+    Kelas <b>{{$course->name}}</b>
+    @endif
 @endsection
 
 @section('content')
     @auth('student')
     <div class="row">
+        @if($course)
         <div class="col-9">
             <div class="card shadow mb-4">
                 <div
@@ -46,7 +51,9 @@ Kelas <b>{{$course->name}}</b>
                 </div>
             </div>
         </div>
+        @endif
     </div>
+
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteTitle" aria-hidden="true">
         <form class="modal-dialog modal-dialog-centered" role="document" id="form" method="POST">
             @csrf
