@@ -108,6 +108,7 @@ Route::prefix('student')->group(function() {
         });
 
         Route::prefix('materials')->group(function() {
+            Route::get('/', [Student\MaterialController::class, 'get']);
             Route::get('/{materialId}', [Student\MaterialController::class, 'detail']);
         });
     });
