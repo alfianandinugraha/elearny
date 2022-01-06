@@ -29,6 +29,28 @@
                     >Keluar Kelas</button>
                 </div>
             </div>
+            <div class="card shadow mb-4">
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <b>Materi</b>
+                </div>
+                <div class="card-body">
+                    @if(!count($materials))
+                    <p>Materi tidak ditemukan</p>
+                    @else
+                    <div class="list-group">
+                        @foreach($materials as $material)
+                        <a 
+                            href="/student/materials/{{$material->material_id}}"
+                            class="list-group-item list-group-item-action flex-column align-items-start"
+                        >
+                            <p class="mb-0">{{$material->title}}</p>
+                        </a>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+            </div>
         </div>
         <div class="col-3">
             <div class="card shadow mb-4">

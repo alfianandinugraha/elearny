@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClassCourse;
+use App\Models\Material;
 use App\Models\StudentCourse;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -56,6 +57,7 @@ class ClassCourseController extends Controller
 
     public function detail($classCourseId) {
         $studentId = Auth::guard('student')->id();
+        $materials = [];
         $studentCourse = DB::table('student_courses')
             ->where('student_courses.student_id', '=', $studentId)
             ->where('student_courses.class_course_id', '=', $classCourseId)
@@ -63,14 +65,21 @@ class ClassCourseController extends Controller
             ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
             ->join('lecturers', 'class_courses.lecturer_id', '=', 'lecturers.lecturer_id')
             ->select([
-                'courses.code', 'courses.description', 'courses.name', 'class_courses.class', 'courses.semester',
-                'student_courses.student_course_id', 'lecturers.fullname AS lecturer_name', 'lecturers.email AS lecturer_email'
+                'courses.code', 'courses.description', 'courses.name', 'class_courses.class_course_id', 'class_courses.class', 'courses.semester', 'student_courses.student_course_id', 'lecturers.fullname AS lecturer_name', 'lecturers.email AS lecturer_email'
             ])
             ->get()
             ->first();
+        
+        if ($studentCourse) {
+            $classCourseId = $studentCourse->class_course_id;
+            $materials = Material::query()
+                ->where('class_course_id', $classCourseId)
+                ->get();
+        }
 
         return view("pages.student.classes.detail", [
-            'course' => $studentCourse
+            'course' => $studentCourse,
+            'materials' => $materials
         ]);
     }
 
