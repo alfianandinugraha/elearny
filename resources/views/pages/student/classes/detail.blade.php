@@ -20,13 +20,6 @@
                 </div>
                 <div class="card-body">
                     <p>{{$course->description}}</p>
-                    <button 
-                        class="ml-auto btn btn-outline-danger"
-                        data-toggle="modal"
-                        data-target="#modalDelete"
-                        data-student-course-id="{{$course->student_course_id}}"
-                        data-class-name="{{$course->name}}"
-                    >Keluar Kelas</button>
                 </div>
             </div>
             <div class="card shadow mb-4">
@@ -70,6 +63,14 @@
                     <hr />
                     <b class="text-primary">Kode</b>
                     <p>{{$course->code}}</p>
+                    <hr />
+                     <button 
+                        class="ml-auto btn btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#modalDelete"
+                        data-student-course-id="{{$course->student_course_id}}"
+                        data-class-name="{{$course->name}}"
+                    ><i class="fas fa-sm fa-sign-out-alt"></i> Keluar Kelas</button>
                 </div>
             </div>
         </div>
