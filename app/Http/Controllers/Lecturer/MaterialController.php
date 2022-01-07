@@ -36,6 +36,9 @@ class MaterialController extends Controller
     public static function form(Request $request) {
         $validateData = MaterialController::formValidator($request->all())->validate();
         $validateData['material_id'] = uniqid();
+        $validateData['filename'] = '';
+
+        $lecturerId = Auth::guard('lecturer')->id();
         $file = $request->file('file');
 
         if ($file) {
@@ -44,6 +47,18 @@ class MaterialController extends Controller
                 $file->getClientOriginalName()
             );
         }
+
+        $classCourse = ClassCourse::checkClass([
+            'course_id' => $validateData['course_id'],
+            'class' => $validateData['class'],
+            'lecturer_id' => $lecturerId
+        ]);
+
+        if (!$classCourse) return back()->withErrors([
+            'class_course_not_found' => 'Kelas tidak ditemukan'
+        ]);
+
+        $validateData['class_course_id'] = $classCourse->class_course_id;
 
         return $validateData;
     }
@@ -112,16 +127,6 @@ class MaterialController extends Controller
         $validateData = MaterialController::form($request);
         $file = $request->file('file');
 
-        $classCourse = ClassCourse::checkClass(
-            $validateData['course_id'],
-            $validateData['class']
-        );
-
-        if (!$classCourse) return back()->withErrors([
-            'class_course_not_found' => 'Kelas tidak ditemukan'
-        ]);
-
-        $validateData['class_course_id'] = $classCourse->class_course_id;
         $isSaved = Material::query()->create($validateData)->save();
 
         if($isSaved && !empty($validateData['filename'])) {
@@ -154,6 +159,33 @@ class MaterialController extends Controller
             'courses' => $courses,
             'action' => 'UPDATE'
         ]);
+    }
+
+    public function update($materialId, Request $request) {
+        $validateData = MaterialController::form($request);
+        $file = $request->file('file');
+
+        $payload = [
+            'title' => $validateData['title'],
+            'content' => $validateData['content'],
+            'class_course_id' => $validateData['class_course_id'],
+            'filename' => $validateData['filename']
+        ];
+
+        if (empty($validateData['filename'])) {
+            unset($payload['filename']);
+        }
+
+        $oldMaterial = Material::query()
+            ->find($materialId, ['filename']);
+            $isSaved = Material::query()->where('material_id', $materialId)->update($payload);
+            
+        if($isSaved && !empty($payload['filename'])) {
+            Storage::disk('materials')->delete($oldMaterial['filename']);
+            Storage::disk('materials')->put($payload['filename'], $file->get());
+        }
+
+        return redirect("/lecturer/materials/$materialId");
     }
 
     public function delete($materialId) {
