@@ -24,4 +24,6 @@ class ClassCourse extends Model
         'class_course_id',
         'course_id'
     ];
+
+    public static $classes = ['A', 'B', 'C', 'D'];
 }
