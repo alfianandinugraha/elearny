@@ -86,6 +86,7 @@ Route::prefix('lecturer')->group(function() {
             Route::get('/add', [Lecturer\MaterialController::class, 'add']);
             Route::post('/add', [Lecturer\MaterialController::class, 'store']);
             Route::get('/{materialId}', [Lecturer\MaterialController::class, 'detail']);
+            Route::get('/{materialId}/update', [Lecturer\MaterialController::class, 'edit']);
         });
     });
 });

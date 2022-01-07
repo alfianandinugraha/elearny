@@ -109,4 +109,29 @@ class MaterialController extends Controller
         }
         return redirect('/lecturer/materials');
     }
+
+    public function edit($materialId) {
+        $lecturerId = Auth::guard('lecturer')->id();
+
+        $material = DB::table('materials')
+            ->where('materials.material_id', '=', $materialId)
+            ->join('class_courses', 'class_courses.class_course_id', '=', 'materials.class_course_id')
+            ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
+            ->get([
+                'class_courses.class', 'materials.*', 'courses.code'
+            ])
+            ->first();
+
+        $courses = DB::table('class_courses')
+            ->where('class_courses.lecturer_id', '=', $lecturerId)
+            ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
+            ->select(['courses.course_id', 'courses.name', 'courses.code'])
+            ->get();
+
+        return view('pages.lecturer.materials.form', [
+            'material' => $material,
+            'courses' => $courses,
+            'action' => 'UPDATE'
+        ]);
+    }
 }
