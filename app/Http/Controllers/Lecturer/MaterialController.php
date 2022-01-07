@@ -36,6 +36,13 @@ class MaterialController extends Controller
         ]);
     }
 
+    public function detail($materialId) {
+        $material = Material::detail($materialId);
+        return view('pages.lecturer.materials.detail', [
+            'material' => $material
+        ]);
+    }
+
     public function add() {
         $lecturerId = Auth::guard('lecturer')->id();
 
