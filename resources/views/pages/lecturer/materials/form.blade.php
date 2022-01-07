@@ -41,9 +41,9 @@
                                     <input 
                                         type="text" 
                                         class="form-control"
-                                        placeholder="Nomor Induk Pengajar"
-                                        value="Materi Penjumlahan Dasar"
-                                        name="{{$material->title}}" />
+                                        placeholder="Masukkan Judul Materi"
+                                        value="{{$material->title}}"
+                                        name="title" />
                                 </div>
                                 <div class="form-group">
                                     <label>Mata Kuliah</label>
@@ -89,8 +89,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>Content</label>
-                                    <textarea id="editor" name="content">
+                                    <label>Konten</label>
+                                    <textarea id="editor" name="content" placeholder="Masukkan konten materi">
                                         {{$material->content}}
                                     </textarea>
                                 </div>

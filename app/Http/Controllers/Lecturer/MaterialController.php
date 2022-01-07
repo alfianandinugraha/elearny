@@ -60,9 +60,18 @@ class MaterialController extends Controller
             ->select(['courses.course_id', 'courses.name', 'courses.code'])
             ->get();
 
-        return view('pages.lecturer.materials.add', [
+        $material = (object) [
+            'title' => '',
+            'content' => '',
+            'code' => '',
+            'class' => ''
+        ];
+
+        return view('pages.lecturer.materials.form', [
             'classes' => $classes,
-            'courses' => $courses
+            'courses' => $courses,
+            'action' => 'ADD',
+            'material' => $material
         ]);
     }
 
