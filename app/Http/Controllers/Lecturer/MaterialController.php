@@ -141,4 +141,9 @@ class MaterialController extends Controller
             'action' => 'UPDATE'
         ]);
     }
+
+    public function delete($materialId) {
+        Material::destroy($materialId);
+        return redirect('/lecturer/materials');
+    }
 }

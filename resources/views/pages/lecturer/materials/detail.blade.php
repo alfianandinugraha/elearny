@@ -90,8 +90,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{-- @csrf
-                @method('DELETE') --}}
+                @csrf
+                @method('DELETE')
                 <p>Apakah ingin menghapus mater <b>{{$material->title}}</b>?</p>
             </div>
             <div class="modal-footer">
