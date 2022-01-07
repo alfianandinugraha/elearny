@@ -53,7 +53,6 @@ class MaterialController extends Controller
         
         if (!$hasClass) return back();
 
-        $classes = ['A', 'B', 'C', 'D'];
         $courses = DB::table('class_courses')
             ->where('class_courses.lecturer_id', '=', $lecturerId)
             ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
@@ -68,7 +67,6 @@ class MaterialController extends Controller
         ];
 
         return view('pages.lecturer.materials.form', [
-            'classes' => $classes,
             'courses' => $courses,
             'action' => 'ADD',
             'material' => $material
@@ -105,7 +103,7 @@ class MaterialController extends Controller
             ->where('class', $validateData['class'])
             ->get(['class_course_id'])
             ->first();
-        
+
         if (!$classCourse) return back()->withErrors([
             'class_course_not_found' => 'Kelas tidak ditemukan'
         ]);
