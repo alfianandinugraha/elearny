@@ -10,9 +10,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class MaterialController extends Controller
 {
+    public static function formValidator($requestAll) {
+        return Validator::make($requestAll, [
+            'title' => ['required'],
+            'course_id' => ['required'],
+            'class' => ['required'],
+            'content' => ['required'],
+            'file' => ['file']
+        ]);
+    }
+
+    public static function uniqueFilename($filename) {
+        $result = explode('.', $filename);
+        $ext = last($result);
+        array_pop($result);
+        $result = implode("", $result) . "_" . uniqid() . "." . $ext;
+
+        return $result;
+    }
+
+    public static function form(Request $request) {
+        $validateData = MaterialController::formValidator($request->all())->validate();
+        $validateData['material_id'] = uniqid();
+        $file = $request->file('file');
+
+        if ($file) {
+            unset($validateData['file']);
+            $validateData['filename'] = MaterialController::uniqueFilename(
+                $file->getClientOriginalName()
+            );
+        }
+
+        return $validateData;
+    }
+
     public function get() {
         $lecturerId = Auth::guard('lecturer')->id();
 
@@ -74,35 +109,13 @@ class MaterialController extends Controller
     }
 
     public function store(Request $request) {
-        $validateData = $request->validate([
-            'title' => ['required'],
-            'course_id' => ['required'],
-            'class' => ['required'],
-            'content' => ['required'],
-            'file' => ['file']
-        ]);
-
-        $validateData['material_id'] = uniqid();
-
+        $validateData = MaterialController::form($request);
         $file = $request->file('file');
-        $filename = "";
 
-        if ($file) {
-            unset($validateData['file']);
-
-            $filename = explode('.', $file->getClientOriginalName());
-            $ext = last($filename);
-            array_pop($filename);
-            $filename = implode("", $filename) . "_" . uniqid() . "." . $ext;
-
-            $validateData['filename'] = $filename;
-        }
-
-        $classCourse = ClassCourse::query()
-            ->where('course_id', $validateData['course_id'])
-            ->where('class', $validateData['class'])
-            ->get(['class_course_id'])
-            ->first();
+        $classCourse = ClassCourse::checkClass(
+            $validateData['course_id'],
+            $validateData['class']
+        );
 
         if (!$classCourse) return back()->withErrors([
             'class_course_not_found' => 'Kelas tidak ditemukan'
@@ -111,9 +124,10 @@ class MaterialController extends Controller
         $validateData['class_course_id'] = $classCourse->class_course_id;
         $isSaved = Material::query()->create($validateData)->save();
 
-        if($isSaved && $filename) {
-            Storage::disk('materials')->put($filename, $file->get());
+        if($isSaved && !empty($validateData['filename'])) {
+            Storage::disk('materials')->put($validateData['filename'], $file->get());
         }
+
         return redirect('/lecturer/materials');
     }
 

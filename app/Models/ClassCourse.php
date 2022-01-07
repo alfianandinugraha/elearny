@@ -26,4 +26,12 @@ class ClassCourse extends Model
     ];
 
     public static $classes = ['A', 'B', 'C', 'D'];
+
+    public static function checkClass($courseId, $class) {
+        return ClassCourse::query()
+            ->where('course_id', $courseId,)
+            ->where('class', $class)
+            ->get(['class_course_id'])
+            ->first();
+    }
 }
