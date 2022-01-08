@@ -39,11 +39,16 @@
                                 <td>{{$classCourse->lecturer_name}}</td>
                                 <td class="d-flex">
                                     <a 
-                                        href="./classes/{{$classCourse->class_course_id}}"  
+                                        href="./classes/{{$classCourse->class_course_id}}/update"  
                                         class="btn btn-outline-primary mr-2"
                                     >
-                                        <i class="fas fa-pen"></i>
+                                        <i class="fas fa-sm fa-pen"></i>
                                     </a>
+                                    <button
+                                        class="btn btn-outline-danger mr-2"
+                                    >
+                                        <i class="fas fa-sm fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
