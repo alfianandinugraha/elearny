@@ -6,12 +6,11 @@
     @auth('admin')
     <div class="row">
         <div class="col-12">
-            <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <x-button class="mr-auto" href="./classes/add">Tambah Kelas</x-button>
-                </div>
-                <div class="card-body">
+            <x-card>
+                <x-slot name="header">
+                    <x-button href="./classes/add">Tambah Kelas</x-button>
+                </x-slot>
+                <x-slot name="body">
                     @if(!count($classCourses))
                     <p>Tidak ada kelas</p>
                     @else
@@ -51,8 +50,8 @@
                         </tbody>
                     </table>
                     @endif
-                </div>
-            </div>
+                </x-slot>
+            </x-card>
         </div>
     </div>
     @endauth
