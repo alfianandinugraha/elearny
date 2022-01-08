@@ -12,12 +12,17 @@ class DashboardController extends Controller
     public function get() {
         $lecturers = Lecturer::all()->take(5);
         $student = Student::all()->take(5);
-        $totalClassCourse = ClassCourse::all()->count();
+
+        $total = (object) [
+            'lecturers' => Lecturer::all()->count(),
+            'student' => Student::all()->count(),
+            'classCourses' => ClassCourse::all()->count()
+        ];
 
         return view('pages.admin.dashboard', [
             'lecturers' => $lecturers,
             'student' => $student,
-            'totalClassCourse' => $totalClassCourse
+            'total' => $total
         ]);
     }
 }
