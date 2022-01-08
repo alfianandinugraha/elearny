@@ -14,11 +14,11 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./{{$student->student_id}}" method="POST">
+                    <form action="./update" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label>NIP</label>
+                            <label>NIM</label>
                             <input 
                                 type="number" 
                                 class="form-control"

@@ -14,7 +14,7 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./{{$lecturer->lecturer_id}}" method="POST">
+                    <form action="./update" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

@@ -34,27 +34,27 @@ Route::prefix('admin')->group(function() {
             Route::get('/', [Admin\LecturerController::class, 'get']);
             Route::get('/add', [Admin\LecturerController::class, 'add']);
             Route::post('/add', [Admin\LecturerController::class, 'store']);
-            Route::delete('/delete/{lecturerId}', [Admin\LecturerController::class, 'delete']);
-            Route::get('/update/{lecturerId}', [Admin\LecturerController::class, 'edit']);
-            Route::put('/update/{lecturerId}', [Admin\LecturerController::class, 'update']);
+            Route::delete('/{lecturerId}/delete/', [Admin\LecturerController::class, 'delete']);
+            Route::get('/{lecturerId}/update/', [Admin\LecturerController::class, 'edit']);
+            Route::put('/{lecturerId}/update/', [Admin\LecturerController::class, 'update']);
         });
 
         Route::prefix('student')->group(function() {
             Route::get('/', [Admin\StudentController::class, 'get']);
             Route::get('/add', [Admin\StudentController::class, 'add']);
             Route::post('/add', [Admin\StudentController::class, 'store']);
-            Route::delete('/delete/{studentId}', [Admin\StudentController::class, 'delete']);
-            Route::get('/update/{student}', [Admin\StudentController::class, 'edit']);
-            Route::put('/update/{student}', [Admin\StudentController::class, 'update']);
+            Route::delete('/{studentId}/delete', [Admin\StudentController::class, 'delete']);
+            Route::get('/{student}/update', [Admin\StudentController::class, 'edit']);
+            Route::put('/{student}/update', [Admin\StudentController::class, 'update']);
         });
 
         Route::prefix('courses')->group(function() {
             Route::get('/', [Admin\CourseController::class, 'get']);
             Route::get('/add', [Admin\CourseController::class, 'add']);
             Route::post('/add', [Admin\CourseController::class, 'store']);
-            Route::delete('/delete/{courseId}', [Admin\CourseController::class, 'delete']);
-            Route::get('/update/{courseId}', [Admin\CourseController::class, 'edit']);
-            Route::put('/update/{courseId}', [Admin\CourseController::class, 'update']);
+            Route::delete('/{courseId}/delete/', [Admin\CourseController::class, 'delete']);
+            Route::get('/{courseId}/update', [Admin\CourseController::class, 'edit']);
+            Route::put('/{courseId}/update', [Admin\CourseController::class, 'update']);
         });
 
         Route::prefix('classes')->group(function() {

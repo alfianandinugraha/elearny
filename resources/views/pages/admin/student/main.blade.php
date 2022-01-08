@@ -33,10 +33,10 @@
                                 <td class="d-flex">
                                     <a 
                                         class="btn btn-outline-primary mr-2"
-                                        href="./student/update/{{$person->student_id}}"
+                                        href="./student/{{$person->student_id}}/update"
                                     >Update</a>
                                     <form 
-                                        action="./student/delete/{{$person->student_id}}" method="POST"
+                                        action="./student/{{$person->student_id}}/delete" method="POST"
                                     >
                                         @csrf
                                         @method('DELETE')
