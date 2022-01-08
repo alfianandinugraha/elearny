@@ -26,7 +26,7 @@
                                 <th scope="row">{{$person->student_number}}</th>
                                 <td>{{$person->fullname}}</td>
                                 <td>{{$person->email}}</td>
-                                <td class="d-flex">
+                                <td>
                                     <x-button
                                         variant="outline" 
                                         class="mr-2"
@@ -34,15 +34,16 @@
                                     >
                                         <x-icon icon="pen" />
                                     </x-button>
-                                    <form 
-                                        action="./student/{{$person->student_id}}/delete" method="POST"
+                                    <x-button 
+                                        variant="outline" 
+                                        color="danger"
+                                        data-toggle="modal"
+                                        data-target="#deleteStudent"
+                                        data-student-id="{{$person->student_id}}"
+                                        data-student-fullname="{{$person->fullname}}"
                                     >
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-button variant="outline" color="danger">
-                                            <x-icon icon="trash" />
-                                        </x-button>
-                                    </form>
+                                        <x-icon icon="trash" />
+                                    </x-button>
                                 </td>
                             </tr>
                         @endforeach
@@ -52,5 +53,27 @@
             </x-card>
         </div>
     </div>
+    <x-modal title="Hapus Data Mahasiswa" id="deleteStudent" method="DELETE">
+        <x-slot name="body">
+            <div>Ingin menghapus data <b id="studentName" class="text-danger"></b> ?</div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-button color="secondary" data-dismiss="modal">Tutup</x-button>
+            <x-button color="danger">Hapus</x-button>
+        </x-slot>
+    </x-modal>
+    @section('scripts')
+    <script>
+        $("#deleteStudent").on('show.bs.modal', function(event) {
+            const button = $(event.relatedTarget)
+            const studentId = button.data('student-id')
+            const studentFullname = button.data('student-fullname')
+
+            const modal = $(this)
+            modal.find('form')[0].action = `./student/${studentId}/delete`
+            modal.find('#studentName').text(studentFullname)
+        })
+    </script>
+    @endsection
     @endauth
 @endsection
