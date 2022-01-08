@@ -61,6 +61,7 @@ Route::prefix('admin')->group(function() {
             Route::get('/', [Admin\ClassCourseController::class, 'get']);
             Route::get('/add', [Admin\ClassCourseController::class, 'add']);
             Route::post('/add', [Admin\ClassCourseController::class, 'store']);
+            Route::get('/{classCourseId}/update', [Admin\ClassCourseController::class, 'edit']);
         });
     });
 });

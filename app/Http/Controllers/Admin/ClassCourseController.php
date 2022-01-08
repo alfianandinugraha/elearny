@@ -26,17 +26,33 @@ class ClassCourseController extends Controller
     }
 
     public function add() {
-        $lecturers = Lecturer::query()
-            ->get(['fullname', 'lecturer_id', 'lecturer_number']);
-        $courses = Course::query()
-            ->get(['code', 'name', 'course_id']);
-        $classes = ['A', 'B', 'C', 'D'];
+        $metaData = (object) [
+            'heading' => 'Tambah Kelas',
+            'buttonText' => 'Tambah',
+            'title' => 'Tambah Kelas',
+            'action' => './add'
+        ];
 
-        return view('pages.admin.classes.add', [
-            'lecturers' => $lecturers,
-            'courses' => $courses,
-            'classes' => $classes
-        ]);
+        return view('pages.admin.classes.form', compact('metaData'));
+    }
+
+    public function edit($classCourseId) {
+        $classCourse = ClassCourse::query()
+            ->getQuery()
+            ->where('class_courses.class_course_id', $classCourseId)
+            ->join('lecturers', 'lecturers.lecturer_id', '=', 'class_courses.lecturer_id')
+            ->first([
+                'lecturers.fullname AS lecturer_fullname', 'class_courses.*'
+            ]);
+
+        $metaData = (object) [
+            'heading' => 'Update Kelas',
+            'buttonText' => 'Update',
+            'title' => 'Update Kelas',
+            'action' => './update'
+        ];
+
+        return view('pages.admin.classes.form', compact('classCourse', 'metaData'));
     }
 
     public function store(Request $request) {
