@@ -42,12 +42,12 @@
                                         href="./classes/{{$classCourse->class_course_id}}/update"  
                                         class="btn btn-outline-primary mr-2"
                                     >
-                                        <i class="fas fa-sm fa-pen"></i>
+                                        <x-icon icon="pen"/>
                                     </a>
                                     <button
                                         class="btn btn-outline-danger mr-2"
                                     >
-                                        <i class="fas fa-sm fa-trash"></i>
+                                        <x-icon icon="trash"/>
                                     </button>
                                 </td>
                             </tr>

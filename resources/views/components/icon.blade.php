@@ -1,0 +1,1 @@
+<i class="fas fa-{{$size}} fa-{{$icon}}"></i>
