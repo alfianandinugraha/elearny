@@ -4,7 +4,11 @@
 
 <head>
     @include('components/head')
-    <title>Dashboard Admin - Elearny</title>
+    @hasSection('title')
+        <title>@yield('title') | Elearny Web App</title>
+    @else
+        <title>Elearny Web App</title>
+    @endif
     @yield('head')
 </head>
 

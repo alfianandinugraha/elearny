@@ -16,6 +16,8 @@
 
 @section('heading', $metaData->heading)
 
+@section('title', $metaData->title)
+
 @section('content')
     @auth('admin')
     <div class="row">
