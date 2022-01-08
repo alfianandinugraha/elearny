@@ -89,6 +89,10 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <a href="/admin/lecturers" class="btn btn-outline-primary w-100">
+                        <i class="fas fa-sm fa-external-link-alt mr-1"></i>
+                        Lihat Semua
+                    </a>
                 </div>
             </div>
         </div>
@@ -115,6 +119,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <a href="/admin/student" class="btn btn-outline-primary w-100">
+                        <i class="fas fa-sm fa-external-link-alt mr-1"></i>
+                        Lihat Semua
+                    </a>
                 </div>
             </div>
         </div>
