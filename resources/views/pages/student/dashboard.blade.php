@@ -47,6 +47,9 @@ Selamat Datang, <b>{{Auth::guard('student')->user()->fullname}}</b> !
                     <h6 class="m-0 font-weight-bold text-primary">Akses Kelas</h6>
                 </div>
                 <div class="card-body">
+                    @if(!count($classes))
+                    <p>Tidak ada kelas</p>
+                    @else
                     <table class="table">
                         <thead>
                             <tr>
@@ -78,6 +81,7 @@ Selamat Datang, <b>{{Auth::guard('student')->user()->fullname}}</b> !
                         <i class="fas fa-sm fa-external-link-alt mr-1"></i>
                         Lihat Semua
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -88,6 +92,9 @@ Selamat Datang, <b>{{Auth::guard('student')->user()->fullname}}</b> !
                     <h6 class="m-0 font-weight-bold text-primary">Materi</h6>
                 </div>
                 <div class="card-body">
+                    @if(!count($materials))
+                    <p>Belum ada materi</p>
+                    @else
                     <table class="table">
                         <thead>
                             <tr>
@@ -117,6 +124,7 @@ Selamat Datang, <b>{{Auth::guard('student')->user()->fullname}}</b> !
                         <i class="fas fa-sm fa-external-link-alt mr-1"></i>
                         Lihat Semua
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
