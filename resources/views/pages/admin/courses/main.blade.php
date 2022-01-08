@@ -6,15 +6,11 @@
     @auth('admin')
     <div class="row">
         <div class="col-12">
-            <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <a 
-                        class="mr-auto btn btn-primary"
-                        href="./courses/add"
-                    >Tambah Mata Kuliah</a>
-                </div>
-                <div class="card-body">
+            <x-card class="card shadow mb-4">
+                <x-slot name="header">
+                    <x-button href="./courses/add">Tambah Mata Kuliah</x-button>
+                </x-slot>
+                <x-slot name="body">
                     <table class="table">
                         <thead>
                             <tr>
@@ -33,24 +29,29 @@
                                 <td>{{$course->description}}</td>
                                 <td>{{$course->semester}}</td>
                                 <td class="d-flex">
-                                    <a 
-                                        class="btn btn-outline-primary mr-2"
+                                    <x-button
+                                        variant="outline" 
+                                        class="mr-2"
                                         href="./courses/{{$course->course_id}}/update"
-                                    >Update</a>
+                                    >
+                                        <x-icon icon="pen" />
+                                    </x-button>
                                     <form 
                                         action="./courses/{{$course->course_id}}/delete" method="POST"
                                     >
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-outline-danger">Hapus</button>
+                                        <x-button variant="outline" color="danger">
+                                            <x-icon icon="trash" />
+                                        </x-button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
+                </x-slot>
+            </x-card>
         </div>
     </div>
     @endauth
