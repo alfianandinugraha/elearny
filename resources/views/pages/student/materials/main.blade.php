@@ -2,12 +2,14 @@
 
 @section('heading', 'List Materi Perkuliahan')
 
+@section('title', 'List Materi Perkuliahan')
+
 @section('content')
     @auth('student')
     <div class="row">
         <div class="col-12">
-            <div class="card shadow mb-4">
-                <div class="card-body">
+            <x-card>
+                <x-slot name="body">
                     @if(!count($materials))
                     <p>Belum ada materi</p>
                     @else
@@ -29,17 +31,19 @@
                                 <td>{{$material->class}}</td>
                                 <td>{{$material->lecturer_name}}</td>
                                 <td class="d-flex">
-                                    <a 
+                                    <x-button
+                                        variant="outline" 
                                         href="./materials/{{$material->material_id}}"  
-                                        class="btn btn-outline-primary mr-2"
+                                        class="mr-2"
                                     >
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
+                                        <x-icon icon="external-link-alt" />
+                                    </x-button>
                                     <a 
-                                        href="/materials/{{$material->material_id}}"  
+                                        variant="outline" 
+                                        href="/materials/{{$material->filename}}"  
                                         class="btn btn-outline-primary mr-2"
                                     >
-                                        <i class="fas fa-download"></i>
+                                        <x-icon icon="download" />
                                     </a>
                                 </td>
                             </tr>
@@ -47,8 +51,8 @@
                         </tbody>
                     </table>
                     @endif
-                </div>
-            </div>
+                </x-slot>
+            </x-card>
         </div>
     </div>
     @endauth

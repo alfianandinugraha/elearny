@@ -12,14 +12,15 @@ class MaterialController extends Controller
 {
     public function get() {
         $studentId = Auth::guard('student')->id();
-        $materials = DB::table('materials')
+        $materials = Material::query()
+            ->getQuery()
             ->where('student_courses.student_id', $studentId)
             ->join('class_courses', 'class_courses.class_course_id', '=', 'materials.class_course_id')
             ->join('student_courses', 'student_courses.class_course_id', '=', 'class_courses.class_course_id')
             ->join('courses', 'courses.course_id', '=', 'class_courses.course_id')
             ->join('lecturers', 'lecturers.lecturer_id', '=', 'class_courses.lecturer_id')
             ->get([
-                'courses.name AS course_name', 'materials.title', 'class_courses.class', 'materials.material_id', 'lecturers.fullname AS lecturer_name'
+                'courses.name AS course_name', 'materials.*', 'class_courses.class', 'lecturers.fullname AS lecturer_name'
             ]);
         
         // dd($materials);
