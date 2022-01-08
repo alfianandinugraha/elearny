@@ -12,7 +12,7 @@
             type="text" 
             class="form-control form-control-user"
             placeholder="NIM"
-            value="5190411123"
+            value="5190411000"
             name="student_number" />
     </div>
     <div class="form-group">
