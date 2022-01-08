@@ -34,14 +34,21 @@
                                     >
                                         <x-icon icon="pen" />
                                     </x-button>
+                                    <x-button
+                                        variant="outline"
+                                        color="danger"
+                                        data-toggle="modal"
+                                        data-target="#deleteModal"
+                                        data-lecturer-id="{{$lecturer->lecturer_id}}"
+                                        data-lecturer-fullname="{{$lecturer->fullname}}"
+                                    >
+                                        <x-icon icon="trash" />
+                                    </x-button>
                                     <form 
                                         action="./lecturers/{{$lecturer->lecturer_id}}/delete" method="POST"
                                     >
                                         @csrf
                                         @method('DELETE')
-                                        <x-button variant="outline" color="danger">
-                                            <x-icon icon="trash" />
-                                        </x-button>
                                     </form>
                                 </td>
                             </tr>
@@ -52,5 +59,27 @@
             </x-card>
         </div>
     </div>
+    <x-modal title="Hapus Data Dosen" id="deleteModal" method="DELETE">
+        <x-slot name="body">
+            <div>Ingin menghapus data <b id="lecturerName" class="text-danger"></b> ?</div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-button color="secondary" data-dismiss="modal">Tutup</x-button>
+            <x-button color="danger">Hapus</x-button>
+        </x-slot>
+    </x-modal>
+    @section('scripts')
+    <script>
+        $("#deleteModal").on('show.bs.modal', function(event) {
+            const button = $(event.relatedTarget)
+            const lecturerId = button.data('lecturer-id')
+            const lecturerFullname = button.data('lecturer-fullname')
+
+            const modal = $(this)
+            modal.find('form')[0].action = `./lecturers/${lecturerId}/delete`
+            modal.find('#lecturerName').text(lecturerFullname)
+        })
+    </script>
+    @endsection
     @endauth
 @endsection
