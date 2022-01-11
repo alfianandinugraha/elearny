@@ -37,8 +37,12 @@ class StudentController extends Controller
         return view('pages.admin.student.form', compact('pageType'));
     }
 
-    public function edit($studentId) {
+    public function edit($studentId, Request $request) {
         $student = Student::all()->where('student_id', $studentId)->first();
+        $student->student_number = old('student_number') ?? $student->student_number;
+        $student->email = old('email') ?? $student->email;
+        $student->fullname = old('fullname') ?? $student->fullname;
+        $student->gender = old('gender') ?? $student->gender;
         $pageType = 'update';
 
         return view('pages.admin.student.form', compact('student', 'pageType'));
