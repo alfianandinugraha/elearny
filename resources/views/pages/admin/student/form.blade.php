@@ -15,10 +15,10 @@
     ];
 
     $student = !empty($student) ? $student : (object) [
-        'student_number' => '5190411123',
-        'fullname' => 'Jennings Littel',
-        'email' => 'okeefe.dion@yahoo.com',
-        'gender' => 'male'
+        'student_number' => old('student_number') ?? '5190411123',
+        'fullname' => old('fullname') ?? 'Jennings Littel',
+        'email' => old('email') ?? 'okeefe.dion@yahoo.com',
+        'gender' => old('gender') ?? 'male'
     ];
 @endphp
 
