@@ -49,6 +49,21 @@ class StudentController extends Controller
         $validator = Validator::make($request->all(), StudentController::$rules, [], StudentController::$attributes);
 
         $payload = $validator->validate();
+        $errors = [];
+
+        $student = Student::query()->where('student_number', $payload['student_number'])->first(['student_id']);
+        if ($student && $student['student_id'] != $studentId) {
+            $errors['student_number_exist'] = "NIM sudah terdaftar";
+        }
+
+        $student = Student::query()->where('email', $payload['email'])->first(['email', 'student_id']);
+        if ($student && $student['student_id'] != $studentId) {
+            $errors['email_exist'] = "Email sudah terdaftar";
+        };
+
+        if (count($errors)) {
+            return back()->withInput()->withErrors($errors);
+        }
 
         Student::query()->where('student_id', $studentId)->update($payload);
 
