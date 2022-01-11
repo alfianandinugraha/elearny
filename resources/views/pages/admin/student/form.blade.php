@@ -48,6 +48,7 @@
                                 value="{{$student->student_number}}"
                                 name="student_number" />
                             <x-form.error name="student_number" />
+                            <x-form.error name="student_number_exist" />
                         </div>
                         <div class="form-group">
                             <label>Nama Lengkap</label>
@@ -68,6 +69,7 @@
                                 value="{{$student->email}}"
                                 name="email" />
                             <x-form.error name="email" />
+                            <x-form.error name="email_exist" />
                         </div>
                         <div>
                             <div class="form-check form-check-inline">
