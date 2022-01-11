@@ -6,10 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 
 class StudentController extends Controller
 {
+    public static $rules = [
+        'student_number' => ['required'],
+        'fullname' => ['required'],
+        'email' => ['required'],
+        'gender' => ['required'],
+        'password' => ['required'],
+    ];
+
+    public static $attributes = [
+        'student_number' => 'NIM',
+        'fullname' => 'nama lengkap',
+    ];
+
     public function get() {
         $student = Student::all();
         return view('pages.admin.student.main', [
@@ -31,12 +45,10 @@ class StudentController extends Controller
     }
 
     public function update($studentId, Request $request) {
-        $payload = $request->validate([
-            'student_number' => ['required'],
-            'fullname' => ['required'],
-            'email' => ['required'],
-            'gender' => ['required'],
-        ]);
+        unset(StudentController::$rules['password']);
+        $validator = Validator::make($request->all(), StudentController::$rules, [], StudentController::$attributes);
+
+        $payload = $validator->validate();
 
         Student::query()->where('student_id', $studentId)->update($payload);
 
@@ -49,13 +61,9 @@ class StudentController extends Controller
     }
 
     public function store(Request $request) {
-        $payload = $request->validate([
-            'student_number' => ['required'],
-            'fullname' => ['required'],
-            'email' => ['required'],
-            'gender' => ['required'],
-            'password' => ['required'],
-        ]);
+        $validator = Validator::make($request->all(), StudentController::$rules, [], StudentController::$attributes);
+
+        $payload = $validator->validate();
         $payload['student_id'] = Uuid::uuid4();
 
         Student::query()->create($payload)->save();
