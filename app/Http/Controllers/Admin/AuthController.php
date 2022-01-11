@@ -14,6 +14,11 @@ class AuthController extends Controller
     }
 
     public function attempt(Request $request) {
+        $request->validate([
+            'username' => ['required'],
+            'password' => ['required']
+        ]);
+
         AuthService::logoutAll();
         $isValid = Auth::guard('admin')->attempt($request->only('username', 'password'));
         if (!$isValid) {

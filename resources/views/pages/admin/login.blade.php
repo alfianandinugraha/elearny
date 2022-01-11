@@ -14,6 +14,7 @@
             placeholder="Username"
             value="admin"
             name="username" />
+        <x-form.error name="username"/>
     </div>
     <div class="form-group">
         <input 
@@ -22,6 +23,7 @@
             placeholder="Password"
             value="admin"
             name="password" />
+        <x-form.error name="password"/>
     </div>
     <button type="submit" class="btn btn-primary btn-user btn-block">
         Login
