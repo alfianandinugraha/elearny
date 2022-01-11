@@ -1,6 +1,28 @@
 @extends('layouts.dashboard')
+@php
+    $metaData = $pageType == 'update' ? (object) [
+        'title' => 'Update Mahasiswa',
+        'action' => './update',
+        'type' => 'update',
+        'buttonText' => 'Update',
+        'method' => 'UPDATE'
+    ] : (object) [
+        'title' => 'Tambah Mahasiswa',
+        'action' => './add',
+        'type' => 'add',
+        'buttonText' => 'Tambah',
+        'method' => 'POST'
+    ];
 
-@section('heading', 'Edit Mahasiswa')
+    $student = !empty($student) ? $student : (object) [
+        'student_number' => '5190411123',
+        'fullname' => 'Jennings Littel',
+        'email' => 'okeefe.dion@yahoo.com',
+        'gender' => 'male'
+    ];
+@endphp
+
+@section('heading', $metaData->title)
 
 @section('content')
     @auth('admin')
@@ -14,9 +36,9 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form action="./update" method="POST">
+                    <form action="{{$metaData->action}}" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method($metaData->method)
                         <div class="form-group">
                             <label>NIM</label>
                             <input 
@@ -68,8 +90,19 @@
                                 <label class="form-check-label" for="radio-female">Wanita</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3 w-100">
-                            Edit
+                        <div class="form-group mt-2">
+                            @if($metaData->type == 'add')
+                            <label>Password</label>
+                            <input 
+                                type="password" 
+                                class="form-control"
+                                placeholder="Masukkan password"
+                                value="hello"
+                                name="password" />
+                            @endif
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            {{$metaData->buttonText}}
                         </button>
                     </form>
                 </div>

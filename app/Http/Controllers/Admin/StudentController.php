@@ -18,14 +18,16 @@ class StudentController extends Controller
     }
 
     public function add() {
-        return view('pages.admin.student.add');
+        $pageType = 'add';
+
+        return view('pages.admin.student.form', compact('pageType'));
     }
 
     public function edit($studentId) {
         $student = Student::all()->where('student_id', $studentId)->first();
-        return view('pages.admin.student.edit', [
-            'student' => $student
-        ]);
+        $pageType = 'update';
+
+        return view('pages.admin.student.form', compact('student', 'metaData'));
     }
 
     public function update($studentId, Request $request) {
