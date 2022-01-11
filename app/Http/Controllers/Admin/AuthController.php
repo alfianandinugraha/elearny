@@ -22,7 +22,9 @@ class AuthController extends Controller
         AuthService::logoutAll();
         $isValid = Auth::guard('admin')->attempt($request->only('username', 'password'));
         if (!$isValid) {
-            return back();
+            return back()->withInput()->withErrors([
+                'failed' => trans('auth.failed')
+            ]);
         }
 
         return redirect(route('admin-dashboard'));

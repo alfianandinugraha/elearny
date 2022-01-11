@@ -12,7 +12,7 @@
             type="text" 
             class="form-control form-control-user"
             placeholder="Username"
-            value="admin"
+            value="{{old('username')}}"
             name="username" />
         <x-form.error name="username"/>
     </div>
@@ -21,9 +21,10 @@
             type="password" 
             class="form-control form-control-user"
             placeholder="Password"
-            value="admin"
+            value="{{old('password')}}"
             name="password" />
         <x-form.error name="password"/>
+        <x-form.error name="failed" />
     </div>
     <button type="submit" class="btn btn-primary btn-user btn-block">
         Login
