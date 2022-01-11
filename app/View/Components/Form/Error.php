@@ -14,7 +14,7 @@ class Error extends Component
      */
     public function __construct($name)
     {
-        $this->name;
+        $this->name = $name;
     }
 
     /**
