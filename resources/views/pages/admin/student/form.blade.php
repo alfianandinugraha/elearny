@@ -44,7 +44,7 @@
                             <input 
                                 type="number" 
                                 class="form-control"
-                                placeholder="Nomor Induk Pengajar"
+                                placeholder="Nomor Induk Mahasiswa"
                                 value="{{$student->student_number}}"
                                 name="student_number" />
                             <x-form.error name="student_number" />
