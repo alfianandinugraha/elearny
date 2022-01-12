@@ -15,10 +15,10 @@
     ];
 
     $lecturer = !empty($lecturer) ? $lecturer : (object) [
-        'lecturer_number' => '1112817379',
-        'fullname' => 'Dr. Lewis Morissette II',
-        'email' => 'brielle56@yahoo.com',
-        'gender' => 'male'
+        'lecturer_number' => old('lecturer_number') ?? '1112817379',
+        'fullname' => old('fullname') ?? 'Dr. Lewis Morissette II',
+        'email' => old('email') ?? 'brielle56@yahoo.com',
+        'gender' => old('gender') ?? 'male'
     ];
 @endphp
 
@@ -47,6 +47,7 @@
                                 placeholder="Nomor Induk Pengajar"
                                 value="{{$lecturer->lecturer_number}}"
                                 name="lecturer_number" />
+                            <x-form.error name="lecturer_number" />
                         </div>
                         <div class="form-group">
                             <label>Nama Lengkap</label>
@@ -56,6 +57,7 @@
                                 placeholder="Masukkan nama lengkap"
                                 value="{{$lecturer->fullname}}"
                                 name="fullname" />
+                            <x-form.error name="fullname" />
                         </div>
                         <div class="form-group">
                             <label>Email</label>
@@ -65,6 +67,7 @@
                                 placeholder="Masukkan email"
                                 value="{{$lecturer->email}}"
                                 name="email" />
+                            <x-form.error name="email" />
                         </div>
                         <div>
                             <div class="form-check form-check-inline">
@@ -89,6 +92,7 @@
                                 >
                                 <label class="form-check-label" for="radio-female">Wanita</label>
                             </div>
+                            <x-form.error name="gender" />
                         </div>
                         <div class="form-group mt-2">
                             @if($pageType == 'add')
@@ -99,6 +103,7 @@
                                 placeholder="Masukkan password"
                                 value="hello"
                                 name="password" />
+                            <x-form.error name="password" />
                             @endif
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
