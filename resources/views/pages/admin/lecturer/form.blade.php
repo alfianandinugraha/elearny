@@ -28,14 +28,13 @@
     @auth('admin')
     <div class="row">
         <div class="col-12 col-lg-6">
-            <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <x-card>
+                <x-slot name="header">
                     <h6 class="m-0 font-weight-bold text-primary">
                         Formulir
                     </h6>
-                </div>
-                <div class="card-body">
+                </x-slot>
+                <x-slot name="body">
                     <form action="{{$metaData->action}}" method="POST">
                         @csrf
                         @method($metaData->method)
@@ -110,8 +109,8 @@
                             {{$metaData->buttonText}}
                         </button>
                     </form>
-                </div>
-            </div>
+                </x-slot>
+            </x-card>
         </div>
     </div>
     @endauth
