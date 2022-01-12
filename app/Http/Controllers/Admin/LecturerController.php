@@ -6,10 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Lecturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 
 class LecturerController extends Controller
 {
+    public static $rules = [
+        'lecturer_number' => ['required'],
+        'fullname' => ['required'],
+        'email' => ['required'],
+        'gender' => ['required'],
+        'password' => ['required'],
+    ];
+
+    public static $attributes = [
+        'lecturer_number' => 'NIP',
+        'fullname' => 'nama lengkap'
+    ];
+
     public function get() {
         $lecturers = Lecturer::all();
         return view('pages.admin.lecturer.main', [
@@ -31,12 +45,9 @@ class LecturerController extends Controller
     }
 
     public function update($lecturerId, Request $request) {
-        $payload = $request->validate([
-            'lecturer_number' => ['required'],
-            'fullname' => ['required'],
-            'email' => ['required'],
-            'gender' => ['required'],
-        ]);
+        unset(LecturerController::$rules['password']);
+        $validator = Validator::make($request->all(), LecturerController::$rules, [], LecturerController::$attributes);
+        $payload = $validator->validate();
 
         Lecturer::query()->where('lecturer_id', $lecturerId)->update($payload);
 
@@ -44,13 +55,8 @@ class LecturerController extends Controller
     }
 
     public function store(Request $request) {
-        $payload = $request->validate([
-            'lecturer_number' => ['required'],
-            'fullname' => ['required'],
-            'email' => ['required'],
-            'gender' => ['required'],
-            'password' => ['required'],
-        ]);
+        $validator = Validator::make($request->all(), LecturerController::$rules, [], LecturerController::$attributes);
+        $payload = $validator->validate();
         $payload['lecturer_id'] = Uuid::uuid4();
         
         $lecturer = new Lecturer();
