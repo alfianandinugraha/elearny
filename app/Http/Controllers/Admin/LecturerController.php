@@ -18,14 +18,16 @@ class LecturerController extends Controller
     }
 
     public function add() {
-        return view('pages.admin.lecturer.add');
+        $pageType = 'add';
+
+        return view('pages.admin.lecturer.form', compact('pageType'));
     }
 
     public function edit($lecturerId) {
         $lecturer = Lecturer::all()->where('lecturer_id', $lecturerId)->first();
-        return view('pages.admin.lecturer.edit', [
-            'lecturer' => $lecturer
-        ]);
+        $pageType = "update";
+
+        return view('pages.admin.lecturer.form', compact('lecturer', 'pageType'));
     }
 
     public function update($lecturerId, Request $request) {
