@@ -57,6 +57,22 @@ class LecturerController extends Controller
     public function store(Request $request) {
         $validator = Validator::make($request->all(), LecturerController::$rules, [], LecturerController::$attributes);
         $payload = $validator->validate();
+        $errors = [];
+
+        $isLecturerNumberExist = Lecturer::query()->where('lecturer_number', $payload['lecturer_number'])->first();
+        if ($isLecturerNumberExist) {
+            $errors['lecturer_number_exist'] = "NIP telah terdaftar.";
+        }
+
+        $isEmailExist = Lecturer::query()->where('email', $payload['email'])->first();
+        if ($isEmailExist) {
+            $errors['email_exist'] = "Email telah terdaftar.";
+        }
+
+        if (count($errors)) {
+            return back()->withInput()->withErrors($errors);
+        }
+
         $payload['lecturer_id'] = Uuid::uuid4();
         
         $lecturer = new Lecturer();
