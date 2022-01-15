@@ -19,17 +19,16 @@ class CourseController extends Controller
     }
 
     public function add() {
-        return view('pages.admin.courses.add', [
-            'semesters' => CourseController::$semesters
-        ]);
+        $pageType = 'add';
+        
+        return view('pages.admin.courses.form', compact('pageType'));
     }
-
+    
     public function edit($courseId) {
         $course = Course::all()->where('course_id', $courseId)->first();
-        return view('pages.admin.courses.edit', [
-            'course' => $course,
-            'semesters' => CourseController::$semesters
-        ]);
+        $pageType = 'update';
+
+        return view('pages.admin.courses.form', compact('course', 'pageType'));
     }
 
     public function store(Request $request) {

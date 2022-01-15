@@ -1,22 +1,46 @@
+@inject("courseModel", "App\Models\Course");
+
 @extends('layouts.dashboard')
 
-@section('heading', 'Edit Mata Kuliah')
+@php
+$course = !empty($course) ? $course : (object) [
+    'code' => 'RWEB',
+    'name' => 'Rekayasa Web',
+    'semester' => 5,
+    'description' => "Itaque omnis in est quia. Ea nihil quod et cum. Et optio quae enim."
+];
+
+$metaData = $pageType == 'update' ? (object) [
+    'title' => 'Update Mata Kuliah',
+    'action' => './update',
+    'type' => 'update',
+    'buttonText' => 'Update',
+    'method' => 'PUT'
+] : (object) [
+    'title' => 'Tambah Mata Kuliah',
+    'action' => './add',
+    'type' => 'add',
+    'buttonText' => 'Tambah',
+    'method' => 'POST'
+];
+@endphp
+
+@section('heading', $metaData->title)
 
 @section('content')
     @auth('admin')
     <div class="row">
         <div class="col-12 col-lg-6">
-            <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <x-card>
+                <x-slot name="header">
                     <h6 class="m-0 font-weight-bold text-primary">
                         Formulir
                     </h6>
-                </div>
-                <div class="card-body">
-                    <form action="./update" method="POST">
+                </x-slot>
+                <x-slot name="body">
+                    <form action="{{$metaData->action}}" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method($metaData->method)
                         <div class="form-group">
                             <label>Kode</label>
                             <input 
@@ -25,6 +49,7 @@
                                 placeholder="Kode mata kuliah"
                                 value="{{$course->code}}"
                                 name="code" />
+                            <x-form.error name="code" />
                         </div>
                         <div class="form-group">
                             <label>Nama</label>
@@ -34,17 +59,19 @@
                                 placeholder="Masukkan nama lengkap"
                                 value="{{$course->name}}"
                                 name="name" />
+                            <x-form.error name="name" />
                         </div>
                         <div class="form-group mt-2">
                             <label>Semester</label>
                             <select class="form-control" name="semester">
-                                @foreach($semesters as $semester)
+                                @foreach($courseModel::$semesters as $semester)
                                     <option 
                                         value="{{$semester}}"
                                         {{$course->semester == $semester ? 'selected' : ''}}
                                     >{{$semester}}</option>
                                 @endforeach
                             </select>
+                            <x-form.error name="semester" />
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
@@ -54,13 +81,14 @@
                                 name="description"
                                 rows="4"
                             >{{$course->description}}</textarea>
+                            <x-form.error name="description" />
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
-                            Update
+                            {{$metaData->buttonText}}
                         </button>
                     </form>
-                </div>
-            </div>
+                </x-slot>
+            </x-card>
         </div>
     </div>
     @endauth
