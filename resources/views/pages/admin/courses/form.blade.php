@@ -4,10 +4,10 @@
 
 @php
 $course = !empty($course) ? $course : (object) [
-    'code' => 'RWEB',
-    'name' => 'Rekayasa Web',
-    'semester' => 5,
-    'description' => "Itaque omnis in est quia. Ea nihil quod et cum. Et optio quae enim."
+    'code' => old('code') ?? 'RWEB',
+    'name' => old('name') ?? 'Rekayasa Web',
+    'semester' => old('semester') ?? 5,
+    'description' => old('description') ?? "Itaque omnis in est quia. Ea nihil quod et cum. Et optio quae enim."
 ];
 
 $metaData = $pageType == 'update' ? (object) [
