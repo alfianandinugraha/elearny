@@ -25,6 +25,8 @@ class Course extends Model
         'code'
     ];
 
+    public static $semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+
     public function lecturers() {
         return $this->belongsToMany(Lecturer::class, 'class_courses', 'course_id', 'lecturer_id');
     }
