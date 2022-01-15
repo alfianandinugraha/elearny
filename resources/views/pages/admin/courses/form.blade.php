@@ -1,4 +1,4 @@
-@inject("courseModel", "App\Models\Course");
+@inject("courseModel", "App\Models\Course")
 
 @extends('layouts.dashboard')
 
