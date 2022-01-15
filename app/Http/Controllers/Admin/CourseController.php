@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Services\MessageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
@@ -56,8 +57,14 @@ class CourseController extends Controller
         $payload['course_id'] = Uuid::uuid4();
         
         $isIdFound = Course::all()->where('code', $payload['code'])->first();
+        $errors = [];
+
         if ($isIdFound) {
-            return back();
+            $errors['code_exist'] = MessageService::database()->exist('kode');
+        }
+
+        if (count($errors)) {
+            return back()->withInput()->withErrors($errors);
         }
 
         Course::query()->create($payload)->save();

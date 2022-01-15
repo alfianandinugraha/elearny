@@ -58,6 +58,7 @@ $metaData = $pageType == 'update' ? (object) [
                                 value="{{$course->code}}"
                                 name="code" />
                             <x-form.error name="code" />
+                            <x-form.error name="code_exist" />
                         </div>
                         <div class="form-group">
                             <label>Nama</label>
