@@ -3,12 +3,20 @@
 @extends('layouts.dashboard')
 
 @php
+use App\Services\FormService;
+
 $course = !empty($course) ? $course : (object) [
-    'code' => old('code') ?? 'RWEB',
-    'name' => old('name') ?? 'Rekayasa Web',
-    'semester' => old('semester') ?? 5,
-    'description' => old('description') ?? "Itaque omnis in est quia. Ea nihil quod et cum. Et optio quae enim."
+    'code' => 'RWEB',
+    'name' => 'Rekayasa Web',
+    'semester' => 5,
+    'description' => "Itaque omnis in est quia. Ea nihil quod et cum. Et optio quae enim."
 ];
+
+$form = new FormService($errors);
+$course->code = $form->value('code', $course->code);
+$course->name = $form->value('name', $course->name);
+$course->semester = $form->value('semester', $course->semester);
+$course->description = $form->value('description', $course->description);
 
 $metaData = $pageType == 'update' ? (object) [
     'title' => 'Update Mata Kuliah',
