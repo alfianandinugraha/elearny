@@ -5,11 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 
 class CourseController extends Controller
 {
     protected static $semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+
+    protected static $rules = [
+        'code' => ['required'],
+        'name' => ['required'],
+        'description' => ['required'],
+        'semester' => ['required'],
+    ];
+
+    protected static $attributes = [
+        'code' => 'kode',
+        'name' => 'nama mata kuliah',
+        'description' => 'deskripsi',
+    ];
 
     public function get() {
         $courses = Course::all();
@@ -32,12 +46,13 @@ class CourseController extends Controller
     }
 
     public function store(Request $request) {
-        $payload = $request->validate([
-            'code' => ['required'],
-            'name' => ['required'],
-            'description' => ['required'],
-            'semester' => ['required'],
-        ]);
+        $validation = Validator::make(
+            $request->all(), 
+            CourseController::$rules, 
+            [],
+            CourseController::$attributes
+        );
+        $payload = $validation->validate();
         $payload['course_id'] = Uuid::uuid4();
         
         $isIdFound = Course::all()->where('code', $payload['code'])->first();
@@ -51,12 +66,13 @@ class CourseController extends Controller
     }
 
     public function update($courseId, Request $request) {
-        $payload = $request->validate([
-            'code' => ['required'],
-            'name' => ['required'],
-            'description' => ['required'],
-            'semester' => ['required'],
-        ]);
+        $validation = Validator::make(
+            $request->all(), 
+            CourseController::$rules, 
+            [],
+            CourseController::$attributes
+        );
+        $payload = $validation->validate();
 
         Course::query()->where('course_id', $courseId)->update($payload);
 
