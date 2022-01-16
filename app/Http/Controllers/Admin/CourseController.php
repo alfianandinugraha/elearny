@@ -81,6 +81,17 @@ class CourseController extends Controller
         );
         $payload = $validation->validate();
 
+        $course = Course::all()->where('code', $payload['code'])->first();
+        $errors = [];
+
+        if ($course && $course->course_id != $courseId) {
+            $errors['code_exist'] = MessageService::database()->exist('kode');
+        }
+
+        if (count($errors)) {
+            return back()->withInput()->withErrors($errors);
+        }
+
         Course::query()->where('course_id', $courseId)->update($payload);
 
         return back();
